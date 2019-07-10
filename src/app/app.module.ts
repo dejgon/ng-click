@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { StoreModule } from '@ngrx/store';
+import { scoreReducer } from './store/reducers/score.reducer';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,10 @@ import { HomeComponent } from './components/home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({
+      score: scoreReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

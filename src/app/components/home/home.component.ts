@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Observable } from 'rxjs';
+import { Store, createSelector } from '@ngrx/store';
+import { Score } from '../../store/models/score.model'; 
+import { AppState } from '../../store/app.state';
+import * as ScoreActions from '../../store/actions/score.actions';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,12 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  score: Observable<Score>;
+  constructor(private store: Store<AppState>) { 
+    this.score = store.select('score');
+    setInterval(() => this.store.dispatch(new ScoreActions.AddScore({score: 1})),1000);
+  }
 
   ngOnInit() {
+    
   }
-  bought(value: any){
-    console.log("Clicked!");
+
+  bought(){
+    this.store.dispatch( new ScoreActions.AddScore({score: 1}) );
   }
 
 }
