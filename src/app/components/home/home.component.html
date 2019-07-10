@@ -7,14 +7,25 @@
     <div class="row">
         <div class="mid-left col-8">
             <h1>*title*</h1>
-            <div class="main-button" (click)="bought()">Click</div>
-            <div><h1>{{(score | async)?.score}}</h1></div>
+            <div class="main-button" (click)="click()">Click</div>
+            <div>
+                <h4>Money:</h4>
+            </div>
+            <div>
+                <h1>${{(score | async)?.score}}</h1>
+            </div>
         </div>
         <div class="mid-right col-4">
-            <button type="button" class="shop-button" (click)="bought()">CLICK</button>
-            <div class="shop-button"><a value="spl1" (click)="bought()"></a></div>
-            <div class="shop-button"><a value="spl1" (click)="bought()"></a></div>
-            <div class="shop-button"><a value="spl1" (click)="bought()"></a></div>
+            <div class="shop-button" (click)="upgrade()">
+                <p class="up-text">+1 Click</p>
+                <p class="down-text">10$</p>
+            </div>
+            <div class="shop-button" (click)="upgradeSeconds()">
+                <p>+1/s</p>
+                <p>100$</p>
+            </div>
+            <div class="shop-button"><a value="spl1" (click)="upgrade()"></a></div>
+            <div class="shop-button"><a value="spl1" (click)="upgrade()"></a></div>
         </div>
     </div>
 
