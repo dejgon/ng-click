@@ -28,10 +28,8 @@ function getInitialState(){
 }
 
 function incrMultipliers(state: any, payload: any){
-    console.log(state)
     state.pointsPerClick += payload.pointsPerClick;
     state.pointsPerSecond += payload.pointsPerSecond;
-    console.log(state);
     return state;
 }
 function decrMultipliers(state: any, payload: any){
