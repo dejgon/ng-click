@@ -1,9 +1,9 @@
 import * as UpgradesActions from '../actions/upgrades.action';
 import { Upgrades } from '../models/upgrades.model';
 const initialState = {
-    upgrade1: 1,
-    upgrade2: 1,
-    upgrade3: 1
+    pointsPerClick: 1,
+    pointsPerSecond: 1,
+    
 };
 
 export function scoreReducer(state: Upgrades = getScore(), action: UpgradesActions.Actions) {

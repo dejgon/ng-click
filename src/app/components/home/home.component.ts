@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   score: Observable<Score>;
   constructor(private store: Store<AppState>) { 
     this.score = store.select('score');
+
+
     setInterval(() => this.store.dispatch(new ScoreActions.AddScore({score: 1})),1000);
   }
 
@@ -25,4 +27,6 @@ export class HomeComponent implements OnInit {
     this.store.dispatch( new ScoreActions.AddScore({score: 1}) );
   }
 
+
+  
 }
