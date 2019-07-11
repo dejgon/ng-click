@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { scoreReducer } from './store/reducers/score.reducer';
 import { allScoreReducer } from './store/reducers/allScore.reducer';
 import { multiplierReducer } from './store/reducers/multiplier.reducer';
+import { upgradesReducer } from './store/reducers/upgrades.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { multiplierReducer } from './store/reducers/multiplier.reducer';
     StoreModule.forRoot({
       score: scoreReducer,
       allScore: allScoreReducer,
-      multiplier: multiplierReducer
+      multiplier: multiplierReducer,
+      upgrades: upgradesReducer
     })
   ],
   providers: [],

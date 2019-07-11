@@ -1,3 +1,4 @@
 export interface Upgrades {
-   upgrade: number;
+   upgradeLevel: number;
+   idUpgrade: number;
 }

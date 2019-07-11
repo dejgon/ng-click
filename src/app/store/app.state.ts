@@ -6,4 +6,5 @@ export interface AppState {
   readonly score: Score;
   readonly allScore: AllScore;
   readonly multiplier: Multiplier;
+  readonly upgrades: Upgrades;
 }
