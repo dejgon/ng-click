@@ -36,4 +36,17 @@
 .button-text {
     font-size: 10px;
     font-weight: bold;
+    margin: 0;
+}
+.name {
+    font-size: 14px;
+}
+.green {
+    border-color: green;
+}
+.red {
+    border-color: red;
+}
+.deactivated {
+    border-color: gray;
 }
