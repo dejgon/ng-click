@@ -1,7 +1,7 @@
 import * as MultiplierActions from '../actions/multiplier.actions';
 import { Multiplier } from '../models/multiplier.model';
 const initialState = {
-    pointsPerClick: 1,
+    pointsPerClick: 0,
     pointsPerSecond: 0
 };
 

@@ -24,8 +24,9 @@ export class HomeComponent implements OnInit {
   score: Observable<Score>;
   allScore: Observable<AllScore>
   multiplier: Observable<Multiplier>;
-  upgrades: any;
   upgradeLevel: Observable<Upgrades>;
+
+  upgrades: any;
   deactivated: boolean;
   flag: number[] = [0,0];
   constructor(private store: Store<AppState>, private data: DataService) {
@@ -37,6 +38,16 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.subscribe(res =>{
+      console.log(res);
+      this.data.getStatsById(res.userStatsId.userStatsId).subscribe(stats =>{
+        console.log(stats);
+
+        this.store.dispatch(new AllScoreActions.AddAllScore({ allScore: stats['score']}));
+        this.store.dispatch(new ScoreActions.AddScore({ score: stats['money']} ));
+      })
+    }).unsubscribe();
+    
 
     this.getAllUpgrades();
     setInterval(() => {
@@ -54,14 +65,12 @@ export class HomeComponent implements OnInit {
 
   getAllUpgrades() {
     this.data.getAllUpgrades().subscribe(res => {
-      console.log(res);
       this.upgrades = res;
     })
   }
 
   tick() {
     this.multiplier.subscribe(res => {
-      console.log(res.pointsPerSecond);
       var points = 1 * res.pointsPerSecond;
 
       this.store.dispatch(new ScoreActions.AddScore({ score: points }));
@@ -82,7 +91,7 @@ export class HomeComponent implements OnInit {
           return null;
         } else {
           if (level < (maxUpgradeLevel - 1)) {
-            this.store.dispatch(new UpgradesActions.IncrementValue({ idUpgrade: id, upgradeLevel: 0 }));
+            this.store.dispatch(new UpgradesActions.IncrementValue({ idUpgrade: id, upgradeLevel: 1 }));
           } else {
 
             if (this.flag[id] === 0) {

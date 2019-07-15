@@ -16,6 +16,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NavbarComponent } from './_shared/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { userStatsIdReducer } from './store/reducers/userStatsId.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       score: scoreReducer,
       allScore: allScoreReducer,
       multiplier: multiplierReducer,
-      upgrades: upgradesReducer
+      upgrades: upgradesReducer,
+      userStatsId: userStatsIdReducer
     })
   ],
   providers: [DataService],

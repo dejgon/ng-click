@@ -12,10 +12,10 @@ const initialState = [{
 export function upgradesReducer(state: Upgrades[] = initialState, action: UpgradesActions.Actions) {
     switch(action.type) {
         case UpgradesActions.INCREMENT_VALUE:
-            state[action.payload.idUpgrade].upgradeLevel += 1;
+            state[action.payload.idUpgrade].upgradeLevel += action.payload.upgradeLevel;
             return state;
         case UpgradesActions.DECREMENT_VALUE:
-            state[action.payload.idUpgrade].upgradeLevel -= 1;
+            state[action.payload.idUpgrade].upgradeLevel -= action.payload.upgradeLevel;
             return state;
         default:
             return state;

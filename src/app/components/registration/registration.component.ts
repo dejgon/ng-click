@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { DataService } from 'src/app/_services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -9,7 +11,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 export class RegistrationComponent implements OnInit {
 
   register: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private data: DataService,
+    private router: Router) {
     
    }
 
@@ -25,6 +30,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   submit(){
-    
+    this.data.register({username: this.f.username.value, password: this.f.password.value}).subscribe(res => {
+      console.log(res);
+      this.router.navigate(['/login']);
+    }, error => {console.log(error)});
   }
 }
