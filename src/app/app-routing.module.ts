@@ -7,6 +7,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
+  { path: 'game', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegistrationComponent}
 ];

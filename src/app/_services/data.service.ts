@@ -11,4 +11,10 @@ export class DataService {
     getAllUpgrades(){
         return this.http.get(this.url + '/upgrades');
     }
+    login(data) {
+        return this.http.post(this.url + '/login', data)
+    }
+    register(data) {
+        return this.http.post(this.url + '/users', data);
+    }
 }

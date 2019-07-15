@@ -7,14 +7,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
+  users:any;
+  constructor(private router: Router) {
 
-  constructor(private router: Router) { }
-
-  ngOnInit() {
   }
 
-  play(){
-    this.router.navigate(['/register'])
+  ngOnInit() {
+    this.users= [
+      {
+        name: 'fiolcyk',
+        points: 1111
+      },
+      {
+        name: 'dejgoneł',
+        points: 1110
+      }
+    ]
+
+    console.log(this.users);
+  }
+
+  play() {
+    this.router.navigate(['/login'])
   }
 
 }
