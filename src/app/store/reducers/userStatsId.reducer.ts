@@ -2,7 +2,8 @@
 import * as  UserStatsIdActions from '../actions/userStatsId.actions';
 import { UserStatsId } from '../models/userStatsId.model';
 const initialState = {
-    userStatsId: null
+    userStatsId: null,
+    username: null
 };
 
 export function userStatsIdReducer(state: UserStatsId = initialState, action: UserStatsIdActions.Actions) {

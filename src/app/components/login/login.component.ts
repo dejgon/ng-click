@@ -37,22 +37,9 @@ export class LoginComponent implements OnInit {
    
 
     this.sc.login({ username: this.f.username.value , password: this.f.password.value }).subscribe(res => {
-        this.store.dispatch(new UserStatsIdActions.SaveUserStatsId({userStatsId: res['stats'].id }));
-        
-        this.router.navigate(['/game']);
-        /*
-        this.store.dispatch(new AllScoreActions.AddAllScore({ allScore: res['user'].statistics.score}));
-        this.store.dispatch(new ScoreActions.AddScore({ score: res['user'].statistics.money} ));
-        for (let item of res['user'].upgrades){
-          this.store.dispatch(new UpgradesActions.IncrementValue({ idUpgrade: item.upgradeId, upgradeLevel: item.upgradeLvl}));
-        }
-        this.store.dispatch(new MultiplierActions.IncrementMult({ pointsPerClick: res['user'].statistics.pointsPerClick, pointsPerSecond: res['user'].statistics.pointsPerSecond }));
-        // TODO: CLICKS, SCOREFROMCLICKS AND SCOREFROMSECONDS TODO
-        console.log("TODO");
-        */
-        
-        
-      
+        this.store.dispatch(new UserStatsIdActions.SaveUserStatsId({userStatsId: res['stats'].id , username: res['stats'].username}));
+        console.log(res);
+        this.router.navigate(['/game']);  
     })
   }
   register() {

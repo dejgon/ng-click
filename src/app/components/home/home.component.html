@@ -21,11 +21,11 @@
             </div>
         </div>
         <div class="mid-right col-4">
-            <div class="shop-button" [ngClass]="((score | async)?.score >= item.levels[(upgradeLevel | async)[i]?.upgradeLevel].cost)?'green': 'red' " *ngFor="let item of upgrades; let i = index" (click)="upgrade(i)">
+            <div class="shop-button" [ngClass]="((score | async)?.score >= item.levels[(upgradeLvl | async)[i]?.upgradeLvl].cost)?'green': 'red' " *ngFor="let item of upgrades; let i = index" (click)="upgrade(i)">
                 <p class="button-text name">{{item.name}}</p>
-                <p class="button-text">Lvl: {{(upgradeLevel | async)[i]?.upgradeLevel}}</p>
-                <p class="button-text">Stats: {{item.levels[(upgradeLevel | async)[i]?.upgradeLevel].pointsPerClick}}/{{item.levels[(upgradeLevel | async)[i]?.upgradeLevel].pointsPerSecond}}</p>
-                <p class="button-text">Cost: {{item.levels[(upgradeLevel | async)[i]?.upgradeLevel].cost}}$</p>
+                <p class="button-text">Lvl: {{(upgradeLvl | async)[i]?.upgradeLvl}}</p>
+                <p class="button-text">Stats: {{item.levels[(upgradeLvl | async)[i]?.upgradeLvl].pointsPerClick}}/{{item.levels[(upgradeLvl | async)[i]?.upgradeLvl].pointsPerSecond}}</p>
+                <p class="button-text">Cost: {{item.levels[(upgradeLvl | async)[i]?.upgradeLvl].cost}}$</p>
             </div>
             <!--
                 <div class="shop-button" (click)="upgradeSeconds()">

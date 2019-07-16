@@ -17,6 +17,9 @@ export class DataService {
     register(data) {
         return this.http.post(this.url + '/users', data);
     }
+    updateStats(id, data){
+        return this.http.put(this.url + '/stats/' + id, data)
+    }
     getAllStats(){
         return this.http.get(this.url + '/stats');
     }

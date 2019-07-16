@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   score: Observable<Score>;
   allScore: Observable<AllScore>
   multiplier: Observable<Multiplier>;
-  upgradeLevel: Observable<Upgrades>;
+  upgradeLvl: Observable<Upgrades>;
 
   upgrades: any;
   deactivated: boolean;
@@ -33,11 +33,25 @@ export class HomeComponent implements OnInit {
     this.score = store.select('score');
     this.allScore = store.select('allScore');
     this.multiplier = store.select('multiplier');
-    this.upgradeLevel = store.select('upgrades');
+    this.upgradeLvl = store.select('upgrades');
 
   }
 
   ngOnInit() {
+    
+    this.DataOnStart();
+
+    setInterval(() => {
+      this.upgradesStats();
+    },5000)
+
+    this.getAllUpgrades();
+    setInterval(() => {
+      this.tick();
+    }, 1000);
+  }
+
+  DataOnStart(){
     this.store.subscribe(res =>{
       console.log(res);
       this.data.getStatsById(res.userStatsId.userStatsId).subscribe(stats =>{
@@ -45,14 +59,40 @@ export class HomeComponent implements OnInit {
 
         this.store.dispatch(new AllScoreActions.AddAllScore({ allScore: stats['score']}));
         this.store.dispatch(new ScoreActions.AddScore({ score: stats['money']} ));
+        for(let item of stats['upgradeLvls']){
+          this.store.dispatch(new UpgradesActions.IncrementValue({upgradeId: item.upgradeId, upgradeLvl: item.upgradeLvl}))
+        }
+        this.store.dispatch(new MultiplierActions.IncrementMult({pointsPerClick: stats['pointsPerClick'], pointsPerSecond: stats['pointsPerSecond']}))
+        this.store.dispatch
       })
     }).unsubscribe();
-    
+  }
 
-    this.getAllUpgrades();
-    setInterval(() => {
-      this.tick();
-    }, 1000);
+  upgradesStats(){
+    this.store.subscribe(res => {
+      let userStats = {
+        id: res.userStatsId.userStatsId,
+        username: res.userStatsId.username,
+        score: res.allScore.allScore,
+        money: res.score.score,
+        pointsPerClick: res.multiplier.pointsPerClick,
+        pointsPerSecond: res.multiplier.pointsPerSecond,
+        clicks: 0,
+        scoreFromClicks: 0,
+        scoreFromSecond: 0,
+        upgradeLvls: res.upgrades 
+      }
+      console.log(userStats);
+      this.data.updateStats(res.userStatsId.userStatsId, userStats).subscribe(res => {
+        console.log(res);
+      }), err => {console.log(err)};
+      
+      //console.log({message: "asdasd"} ,userStats);
+      
+    }).unsubscribe();
+    
+      
+    
   }
 
   click() {
@@ -72,7 +112,6 @@ export class HomeComponent implements OnInit {
   tick() {
     this.multiplier.subscribe(res => {
       var points = 1 * res.pointsPerSecond;
-
       this.store.dispatch(new ScoreActions.AddScore({ score: points }));
       this.store.dispatch(new AllScoreActions.AddAllScore({ allScore: points }));
     })
@@ -82,7 +121,7 @@ export class HomeComponent implements OnInit {
     var maxUpgradeLevel = this.upgrades[id].levels.length;
     this.score.subscribe(resScore => {
       this.store.select('upgrades').subscribe(resUpgrades => {
-        var level = resUpgrades[id].upgradeLevel;
+        var level = resUpgrades[id].upgradeLvl;
 
         var price = this.upgrades[id].levels[level].cost;
 
@@ -91,7 +130,7 @@ export class HomeComponent implements OnInit {
           return null;
         } else {
           if (level < (maxUpgradeLevel - 1)) {
-            this.store.dispatch(new UpgradesActions.IncrementValue({ idUpgrade: id, upgradeLevel: 1 }));
+            this.store.dispatch(new UpgradesActions.IncrementValue({ upgradeId: id, upgradeLvl: 1 }));
           } else {
 
             if (this.flag[id] === 0) {
