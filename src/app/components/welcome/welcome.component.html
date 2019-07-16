@@ -4,10 +4,29 @@
     <button type="button" class="btn btn-dark" (click)="play()">Play</button>
 
     <div class="ranking-window">
+            <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Score</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of users, let i=index;">
+                        <th scope="row">{{(i+1)}}</th>
+                        <td>{{item.username}}</td>
+                        <td>{{item.score}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+        <!---
         <h5>Ranking:</h5>
         <div *ngFor="let item of users">
-            <span>Name: {{item.name}}  </span>
-            <span>Points:{{item.points}}</span>
+            <span>Name: {{item.username}}  </span>
+            <span>Points: {{item.score}}</span>
         </div>
+        -->
+        
     </div>
 </div>

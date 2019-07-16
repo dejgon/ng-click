@@ -32,6 +32,7 @@ export class RegistrationComponent implements OnInit {
   submit(){
     this.data.register({username: this.f.username.value, password: this.f.password.value}).subscribe(res => {
       console.log(res);
+  
       this.router.navigate(['/login']);
     }, error => {console.log(error)});
   }

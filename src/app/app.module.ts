@@ -17,6 +17,10 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NavbarComponent } from './_shared/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { userStatsIdReducer } from './store/reducers/userStatsId.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UpgradesEffects } from './store/effects/upgrades.effect';
+import { actualUpgradesReducer } from './store/reducers/actualUpgrades.reducer';
+import { AuthGuard } from './_guards/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,15 +36,17 @@ import { userStatsIdReducer } from './store/reducers/userStatsId.reducer';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    EffectsModule.forRoot([UpgradesEffects]),
     StoreModule.forRoot({
       score: scoreReducer,
       allScore: allScoreReducer,
       multiplier: multiplierReducer,
       upgrades: upgradesReducer,
-      userStatsId: userStatsIdReducer
+      userStatsId: userStatsIdReducer,
+      actualUpgrades: actualUpgradesReducer
     })
   ],
-  providers: [DataService],
+  providers: [DataService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

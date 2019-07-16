@@ -8,6 +8,7 @@ import * as ScoreActions from '../../store/actions/score.actions';
 import * as AllScoreActions from '../../store/actions/allScore.actions';
 import * as MultiplierActions from '../../store/actions/multiplier.actions';
 import * as UpgradesActions from '../../store/actions/upgrades.action';
+import * as ActualUpgradesActions from '../../store/actions/actualUpgrades.action';
 import * as  UserStatsIdActions from '../../store/actions/userStatsId.actions';
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ import * as  UserStatsIdActions from '../../store/actions/userStatsId.actions';
 })
 export class LoginComponent implements OnInit {
   login: FormGroup
+ 
   constructor(
     private store: Store<AppState>,
     private router: Router,
@@ -27,22 +29,31 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-
+  ngOnInit() {    
+    if(localStorage.getItem("aaa") === null){  
+      this.store.dispatch(new UpgradesActions.GetInitialData());
+      this.store.dispatch(new ActualUpgradesActions.GetInitialData());
+    }
+   
+    
   }
   get f() {
     return this.login['controls'];
   }
   submit() {
-   
+    
 
     this.sc.login({ username: this.f.username.value , password: this.f.password.value }).subscribe(res => {
+      
         this.store.dispatch(new UserStatsIdActions.SaveUserStatsId({userStatsId: res['stats'].id , username: res['stats'].username}));
-        console.log(res);
+        localStorage.setItem('actualUser', this.f.username.value);
+        
+
         this.router.navigate(['/game']);  
     })
   }
   register() {
     this.router.navigate(['/register']);
   }
+  
 }

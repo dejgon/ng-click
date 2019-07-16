@@ -3,3 +3,6 @@
     flex-direction: column;
     align-items: center;
 }
+.ranking-window {
+    margin-top: 10px;
+}
