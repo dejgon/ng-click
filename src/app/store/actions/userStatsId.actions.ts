@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { UserStatsId } from '../models/userStatsId.model';
+import { UserStatsId } from '../../store/models';
 
 export const SAVE_USER_STATS_ID = '[UserStatsId] Save';
 

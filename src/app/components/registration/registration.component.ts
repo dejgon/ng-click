@@ -25,15 +25,16 @@ export class RegistrationComponent implements OnInit {
       repeatPassword: ['', Validators.required]
     })
   }
-  get f() {
-    return this.register['controls'];
-  }
-
+  
   submit(){
     this.data.register({username: this.f.username.value, password: this.f.password.value}).subscribe(res => {
       console.log(res);
   
       this.router.navigate(['/login']);
     }, error => {console.log(error)});
+  }
+  
+  get f() {
+    return this.register['controls'];
   }
 }

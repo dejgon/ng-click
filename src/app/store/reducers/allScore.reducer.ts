@@ -1,5 +1,5 @@
-import * as AllScoreActions from '../actions/allScore.actions';
-import { AllScore } from '../models/score.model';
+import { AllScoreActions } from '../actions';
+import { AllScore } from '../../store/models';
 const initialState = {
     allScore: 0
 };

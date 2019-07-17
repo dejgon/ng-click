@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { AllScore } from '../models/score.model';
+import { AllScore } from '../../store/models';
 
 export const ADD_ALLSCORE = '[ALLSCORE] Add';
 

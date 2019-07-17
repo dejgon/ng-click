@@ -1,14 +1,14 @@
-import * as ScoreActions from '../actions/score.actions';
-import { Score } from '../models/score.model';
+import { MoneyActions } from '../actions'
+import { Money } from '../../store/models';
 const initialState = {
     score: 0
 };
 
-export function scoreReducer(state: Score = getScore(), action: ScoreActions.Actions) {
+export function scoreReducer(state: Money = getScore(), action: MoneyActions.Actions) {
     switch(action.type) {
-        case ScoreActions.ADD_SCORE:
+        case MoneyActions.ADD_SCORE:
             return addScore(state, action.payload);
-        case ScoreActions.SUBTRACT_SCORE:
+        case MoneyActions.SUBTRACT_SCORE:
             return subtractScore(state, action.payload);
         default:
             return state;

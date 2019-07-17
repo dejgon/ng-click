@@ -9,13 +9,12 @@ import { DataService } from 'src/app/_services/data.service';
 })
 export class WelcomeComponent implements OnInit {
   users: any[] = [];
-  constructor(private router: Router, private sc: DataService) {
 
-  }
+  constructor(private router: Router, private sc: DataService) {}
 
   ngOnInit() {
     this.sc.getAllStats().subscribe(res => {
-      console.log(res);
+      
       for (let item of res['values']) {
         var obj = {
           username: item.username,
@@ -24,11 +23,9 @@ export class WelcomeComponent implements OnInit {
         this.users.push(obj);
       }
     }) 
-    console.log(this.users);
   }
 
   play() {
     this.router.navigate(['/login'])
   }
-
 }

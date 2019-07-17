@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Upgrades } from '../models/upgrades.model';
+import { Upgrades } from '../../store/models';
 
 export const INCREMENT_VALUE = '[VALUE] Increment';
 export const DECREMENT_VALUE = '[VALUE] Decrement';

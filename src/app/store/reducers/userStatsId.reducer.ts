@@ -1,6 +1,5 @@
-
-import * as  UserStatsIdActions from '../actions/userStatsId.actions';
-import { UserStatsId } from '../models/userStatsId.model';
+import { UserStatsIdActions } from '../actions';
+import { UserStatsId } from '../../store/models';
 const initialState = {
     userStatsId: null,
     username: null
@@ -14,5 +13,3 @@ export function userStatsIdReducer(state: UserStatsId = initialState, action: Us
             return state;
     }
 }
-
-

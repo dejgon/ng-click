@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Multiplier } from '../models/multiplier.model';
+import { Multiplier } from '../../store/models';
 
 export const INCR_MULTIPLIERS = '[MULTIPLIERS] Increment';
 export const DECR_MULTIPLIERS = '[MULTIPLIERS] Decrement';

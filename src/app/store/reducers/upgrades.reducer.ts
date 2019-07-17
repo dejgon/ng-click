@@ -1,4 +1,4 @@
-import * as UpgradesActions from '../actions/upgrades.action';
+import { UpgradesActions } from '../actions';
 import { Upgrades } from '../models/upgrades.model';
 
 export function upgradesReducer(state: Upgrades[] = [], action: UpgradesActions.Actions) {

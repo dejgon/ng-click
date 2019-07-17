@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ActualUpgrades } from '../models/actualUpgrades.model';
+import { ActualUpgrades } from '../../store/models';
 
 export const INCREMENT_ACT_UPGRADES_VAL = '[ACT_UPGRADES_VAL] Increment';
 export const DECREMENT_ACT_UPGRADES_VAL = '[ACT_UPGRADES_VAL] Decrement';

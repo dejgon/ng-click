@@ -1,4 +1,4 @@
-import * as MultiplierActions from '../actions/multiplier.actions';
+import { MultiplierActions } from '../actions';
 import { Multiplier } from '../models/multiplier.model';
 const initialState = {
     pointsPerClick: 0,

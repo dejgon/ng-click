@@ -1,4 +1,4 @@
-export interface Score {
+export interface Money {
     score: number;
 }
 export interface AllScore {
