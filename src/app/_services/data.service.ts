@@ -26,5 +26,8 @@ export class DataService {
     getStatsById(id: any){
         return this.http.get(this.url + "/stats/" + id);
     }
+    getStatsByUsername(username: any){
+        return this.http.get(this.url + "/stats/" + username)
+    }
 
 }

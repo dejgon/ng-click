@@ -1,33 +1,18 @@
 import { Action } from '@ngrx/store';
-import { ActualUpgrades } from '../../store/models';
+import { Upgrades } from '../../store/models';
 
-export const INCREMENT_ACT_UPGRADES_VAL = '[ACT_UPGRADES_VAL] Increment';
-export const DECREMENT_ACT_UPGRADES_VAL = '[ACT_UPGRADES_VAL] Decrement';
+export const CHANGE_ACTUAL_UPGRADES = '[ACTUAL_UPGRADES] Change';
+export const LOAD_ACCESS = '[ACTUAL_UPGRADES] Load Access';
 
-export const GET_ACTUAL_UPGRADES = '[ACTUAL_UPGRADES] Get';
-export const LOAD_ACTUAL_SUCCESS = '[ACTUAL_UPGRADES] Load Success';
+export class ChangeActualUpgradesValue implements Action {
+    readonly type = CHANGE_ACTUAL_UPGRADES
 
-export class IncrementActualUpgradesValue implements Action {
-    readonly type = INCREMENT_ACT_UPGRADES_VAL
+    constructor(public payload: Upgrades) {}
+}
+export class LoadAccess implements Action {
+    readonly type = LOAD_ACCESS
 
-    constructor(public payload: ActualUpgrades) {}
+    constructor(public payload: Upgrades){}
 }
 
-export class DecrementActualUpgradesValue implements Action {
-    readonly type = DECREMENT_ACT_UPGRADES_VAL
-
-    constructor(public payload: ActualUpgrades) {}
-}
-export class GetInitialData implements Action {
-    readonly type = GET_ACTUAL_UPGRADES
-
-}
-
-export class LoadSuccess implements Action {
-    readonly type = LOAD_ACTUAL_SUCCESS
-
-    constructor(public payload: ActualUpgrades) {}
-}
-
-
-export type Actions = IncrementActualUpgradesValue | DecrementActualUpgradesValue | GetInitialData | LoadSuccess
+export type Actions = ChangeActualUpgradesValue | LoadAccess

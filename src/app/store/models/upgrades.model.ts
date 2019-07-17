@@ -1,4 +1,7 @@
 export interface Upgrades {
-   upgradeLvl: number;
-   upgradeId: number;
+   id: string,
+   name: string,
+   pointsPerClick: number,
+   pointsPerSecond: number,
+   cost: number
 }

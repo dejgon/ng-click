@@ -1,0 +1,17 @@
+export interface Statistic {
+    id: string,
+    username: string,
+    score: number,
+    money: number,
+    pointsPerClick: number,
+    pointsPerSecond: number,
+    clicks: number,
+    scoreFromClicks: number,
+    scoreFromSecond: number,
+    upgradesLvls: [
+        {
+            upgradeId: number,
+            upgradeLvl: number
+        }
+    ]
+}

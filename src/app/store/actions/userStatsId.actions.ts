@@ -10,5 +10,4 @@ export class SaveUserStatsId implements Action {
     constructor(public payload: UserStatsId) {}
 }
 
-
 export type Actions = SaveUserStatsId

@@ -1,20 +1,12 @@
 import { ActualUpgradesActions } from '../actions';
-import { ActualUpgrades } from '../models/actualUpgrades.model';
+import { Upgrades } from '../../store/models';
 
-export function actualUpgradesReducer(state: ActualUpgrades[] = [], action: ActualUpgradesActions.Actions) {
+export function actualUpgradesReducer(state: Upgrades[] = [], action: ActualUpgradesActions.Actions) {
     switch (action.type) {
-        case ActualUpgradesActions.INCREMENT_ACT_UPGRADES_VAL:
-            state[action.payload.upgradeId].cost = action.payload.cost;
-            state[action.payload.upgradeId].pointsPerClick = action.payload.pointsPerClick;
-            state[action.payload.upgradeId].pointsPerSecond = action.payload.pointsPerSecond;
-            return state  ;
-        case ActualUpgradesActions.DECREMENT_ACT_UPGRADES_VAL:
-
-            return [...state,action.payload];
-        case ActualUpgradesActions.GET_ACTUAL_UPGRADES:
+        case ActualUpgradesActions.CHANGE_ACTUAL_UPGRADES:
             return state;
-        case ActualUpgradesActions.LOAD_ACTUAL_SUCCESS:
-            return getInitialState(action.payload);
+        case ActualUpgradesActions.LOAD_ACCESS:
+            return state;
         default:
             return state;
     }

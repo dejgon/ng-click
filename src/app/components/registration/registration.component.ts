@@ -15,7 +15,6 @@ export class RegistrationComponent implements OnInit {
     private fb: FormBuilder,
     private data: DataService,
     private router: Router) {
-    
    }
 
   ngOnInit() {
@@ -27,9 +26,7 @@ export class RegistrationComponent implements OnInit {
   }
   
   submit(){
-    this.data.register({username: this.f.username.value, password: this.f.password.value}).subscribe(res => {
-      console.log(res);
-  
+    this.data.register({username: this.f.username.value, password: this.f.password.value}).subscribe(res => { 
       this.router.navigate(['/login']);
     }, error => {console.log(error)});
   }

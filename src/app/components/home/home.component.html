@@ -2,9 +2,9 @@
     <div class="row">
         <div class="top col-12">
             <div>
-                <h1>Your score: {{(allScore | async)?.allScore}}</h1>
-                <p> Money per Click {{(multiplier | async)?.pointsPerClick}}</p>
-                <p> Money per Click {{(multiplier | async)?.pointsPerSecond}}</p>
+                <h1>Your score: {{(statistic | async)?.score}}</h1>
+                <p> Money per Click {{(statistic | async)?.pointsPerClick}}</p>
+                <p> Money per Click {{(statistic | async)?.pointsPerSecond}}</p>
             </div>
         </div>
     </div>
@@ -16,16 +16,16 @@
                 <h4>Money:</h4>
             </div>
             <div>
-                <h1>${{(score | async)?.score}}</h1>
+                <h1>${{(statistic | async)?.money}}</h1>
                 
             </div>
         </div>
         <div class="mid-right col-4">
-            <div class="shop-button"  *ngFor="let item of upgrades; let i = index" (click)="upgrade(i)">
+            <div class="shop-button"  *ngFor="let item of staticUpgrades | async; let i = index;" (click)="upgrade(i)">
                 <p class="button-text name">{{item.name}}</p>
-                <p class="button-text">Lvl: {{(upgradeLvl | async)[i]?.upgradeLvl}}</p>
-                <p class="button-text">Stats: {{(actualUpgrades | async)[i]?.pointsPerClick}}/{{(actualUpgrades | async)[i]?.pointsPerSecond}}</p>
-                <p class="button-text">Cost: {{(actualUpgrades | async)[i]?.cost}}$</p>
+                <p class="button-text">Lvl: {{(statistic | async)?.upgradeLvls[i].upgradeLvl}}</p>
+                <p class="button-text">Stats: {{item.pointsPerClick}}/{{item.pointsPerSecond}}</p>
+                <p class="button-text">Cost: {{item.cost}}$</p>
             </div>
             <!--
                 <div class="shop-button" (click)="upgradeSeconds()">

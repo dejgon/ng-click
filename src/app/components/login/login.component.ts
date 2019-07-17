@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { AppState } from 'src/app/store/app.state';
 import { DataService } from 'src/app/_services/data.service';
-import { UpgradesActions, ActualUpgradesActions, UserStatsIdActions } from '../../store/actions';
+import { StatisticActions, UpgradesActions, ActualUpgradesActions, UserStatsIdActions } from '../../store/actions';
 
 @Component({
   selector: 'app-login',
@@ -25,22 +25,17 @@ export class LoginComponent implements OnInit {
       password: ['']
     })
   }
-
   ngOnInit() {
-    if (localStorage.getItem("aaa") === null) {
-      this.store.dispatch(new UpgradesActions.GetInitialData());
-      this.store.dispatch(new ActualUpgradesActions.GetInitialData());
-    }
+    this.store.dispatch(new UpgradesActions.GetUpgrades());
   }
-  
+
   submit() {
-    this.sc.login({ username: this.f.username.value, password: this.f.password.value }).subscribe(res => {
-      this.store.dispatch(new UserStatsIdActions.SaveUserStatsId({ userStatsId: res['stats'].id, username: res['stats'].username }));
-      localStorage.setItem('actualUser', this.f.username.value);
-      this.router.navigate(['/game']);
-    })
+    this.store.dispatch(new StatisticActions.GetStatistic({username: this.f.username.value}));
+    
+    localStorage.setItem('actualUser', this.f.username.value);
+    this.router.navigate(['/game']);
   }
-  
+
   register() {
     this.router.navigate(['/register']);
   }

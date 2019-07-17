@@ -9,15 +9,6 @@ import { DataService } from 'src/app/_services/data.service';
 export class UpgradesEffects {
 
     @Effect()
-    loadMovies$ = createEffect(() => this.actions$.pipe(
-        ofType('[UPGRADES] Get'),
-        mergeMap(() => this.dataService.getAllUpgrades()
-            .pipe(
-                map(upgrades => ({ type: '[UPGRADES] Load Success', payload: upgrades })),
-                catchError(() => EMPTY)
-            ))
-    ));
-    @Effect()
     loadActualUpgrades$ = createEffect(() => this.actions$.pipe(
         ofType('[ACTUAL_UPGRADES] Get'),
         mergeMap(() => this.dataService.getAllUpgrades()
@@ -26,6 +17,25 @@ export class UpgradesEffects {
                 catchError(() => EMPTY)
             ))
     ));
+    @Effect()
+    loadStatistic$ = createEffect(() => this.actions$.pipe(
+        ofType('[STATS] Get'),
+        mergeMap(merge => this.dataService.getStatsById(merge['payload']['username'])
+        .pipe(
+            map(stats => ({ type: '[STATS] Load Success', payload: stats})),
+            catchError(() => EMPTY)
+        ))
+    ));
+    @Effect()
+    loadUpgrades$ = createEffect(() => this.actions$.pipe(
+        ofType('[UPGRADES] Get'),
+        mergeMap(() => this.dataService.getAllUpgrades()
+            .pipe(
+                map(upgrades => ({ type: '[UPGRADES] Load Success', payload: upgrades })),
+                catchError(() => EMPTY)
+            ))
+    ));
+    
 
     constructor(
         private actions$: Actions,
