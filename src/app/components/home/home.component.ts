@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store, createSelector } from '@ngrx/store';
 
 import { AppState } from '../../store/app.state';
-import {Statistic, Upgrades } from '../../store/models';
+import { Statistic, Upgrades } from '../../store/models';
 import { StatisticActions } from '../../store/actions';
 import { DataService } from '../../_services/data.service';
 
@@ -20,20 +20,20 @@ export class HomeComponent implements OnInit {
 
   actualUpgrades: Observable<any>;
   constructor(private store: Store<AppState>, private data: DataService) {
-      this.staticUpgrades = store.select('upgrades');
-      this.actualUpgrades = store.select('actualUpgrades');
-      this.statistic = store.select('statistic');
+    this.staticUpgrades = store.select('upgrades');
+    this.actualUpgrades = store.select('actualUpgrades');
+    this.statistic = store.select('statistic');
   }
 
   ngOnInit() {
-   /*
-      setInterval(() => {   // Save to database (5s)
-        this.upgradeStats();
-      }, 5000)  */ 
-      setInterval(() => {  // "tick"
-        this.tick();
-      }, 1000);
-}
+    /*
+       setInterval(() => {   // Save to database (5s)
+         this.upgradeStats();
+       }, 5000)  */
+    setInterval(() => {  // "tick"
+      this.tick();
+    }, 1000);
+  }
 
   upgradeStats() {
     /*
@@ -59,13 +59,12 @@ export class HomeComponent implements OnInit {
   click() {
     this.store.dispatch(new StatisticActions.ClickEvent());
   }
-  
 
   tick() {
     this.store.dispatch(new StatisticActions.TickEvent());
   }
 
   upgrade(id: any) {
-    
+
   }
 }

@@ -34,6 +34,7 @@ export class UpgradesEffects {
                 map(upgrades => ({ type: '[UPGRADES] Load Success', payload: upgrades })),
                 catchError(() => EMPTY)
             ))
+        
     ));
     
 
