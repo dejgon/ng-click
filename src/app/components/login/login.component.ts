@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     this.store.dispatch(new UpgradesActions.GetUpgrades());
+    this.store.dispatch(new ActualUpgradesActions.GetUpgrades());
   }
 
   submit() {

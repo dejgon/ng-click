@@ -11,7 +11,8 @@ export class GetUpgrades implements Action {
 export class LoadSuccess implements Action {
     readonly type = LOAD_SUCCESS
 
-    constructor(public payload: Upgrades) {}
+    constructor(public payload: Upgrades[]) {}
 }
+
 
 export type Actions = GetUpgrades | LoadSuccess

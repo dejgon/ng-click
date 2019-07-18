@@ -4,7 +4,7 @@ import { Store, createSelector } from '@ngrx/store';
 
 import { AppState } from '../../store/app.state';
 import { Statistic, Upgrades } from '../../store/models';
-import { StatisticActions } from '../../store/actions';
+import { StatisticActions, ActualUpgradesActions, UpgradesActions } from '../../store/actions';
 import { DataService } from '../../_services/data.service';
 
 @Component({
@@ -26,34 +26,35 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*
+  
+    
        setInterval(() => {   // Save to database (5s)
          this.upgradeStats();
-       }, 5000)  */
+       }, 5000)  
     setInterval(() => {  // "tick"
       this.tick();
     }, 1000);
   }
 
   upgradeStats() {
-    /*
-    this.store.subscribe(res => {
+    
+    this.statistic.subscribe(res => {
       let userStats = {
-        id: res.userStatsId.userStatsId,
-        username: res.userStatsId.username,
-        score: res.allScore.allScore,
-        money: res.score.score,
-        pointsPerClick: res.multiplier.pointsPerClick,
-        pointsPerSecond: res.multiplier.pointsPerSecond,
-        clicks: 0,
-        scoreFromClicks: 0,
-        scoreFromSecond: 0,
-        upgradeLvls: res.upgrades
+        id: res.id,
+        username: res.username,
+        score: res.score,
+        money: res.money,
+        pointsPerClick: res.pointsPerClick,
+        pointsPerSecond: res.pointsPerSecond,
+        clicks: res.clicks,
+        scoreFromClicks: res.scoreFromClicks,
+        scoreFromSecond: res.scoreFromSecond,
+        upgradeLvls: res.upgradesLvls
       }
-      this.data.updateStats(res.userStatsId.userStatsId, userStats).subscribe(res => {
+      this.data.updateStats(res.id, userStats).subscribe(res => {
       }), err => { console.log(err) };
     }).unsubscribe();
-    */
+    
   }
 
   click() {
@@ -65,6 +66,17 @@ export class HomeComponent implements OnInit {
   }
 
   upgrade(id: any) {
-
+    this.statistic.subscribe(resStat=>{
+      this.store.select('actualUpgrades').subscribe(resUpgrades =>{
+        if(resStat.money >= resUpgrades[id].cost ){
+          this.store.dispatch(new ActualUpgradesActions.Buy(id));
+        }else{
+          console.log("NIESTAĆCIEKURWIU!")
+        }
+      })
+      
+    })
+    
+  
   }
 }

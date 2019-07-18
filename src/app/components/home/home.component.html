@@ -21,11 +21,11 @@
             </div>
         </div>
         <div class="mid-right col-4">
-            <div class="shop-button"  *ngFor="let item of staticUpgrades | async; let i = index;" (click)="upgrade(i)">
-                <p class="button-text name">{{item.name}}</p>
+            <div class="shop-button"  *ngFor="let item of actualUpgrades | async; let i = index;" (click)="upgrade(i)">
+                <p class="button-text name">{{(actualUpgrades | async)[i]?.name}}</p>
                 <p class="button-text">Lvl: {{(statistic | async)?.upgradeLvls[i].upgradeLvl}}</p>
-                <p class="button-text">Stats: {{item.pointsPerClick}}/{{item.pointsPerSecond}}</p>
-                <p class="button-text">Cost: {{item.cost}}$</p>
+                <p class="button-text">Stats: {{(actualUpgrades | async)[i]?.pointsPerClick}}/{{(actualUpgrades | async)[i]?.pointsPerSecond}}</p>
+                <p class="button-text">Cost: {{(actualUpgrades | async)[i]?.cost}}$</p>
             </div>
             <!--
                 <div class="shop-button" (click)="upgradeSeconds()">
