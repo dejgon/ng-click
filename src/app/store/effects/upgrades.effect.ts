@@ -23,7 +23,7 @@ export class UpgradesEffects {
         ofType('[STATS] Get'),
         concatMap(merge => this.dataService.getStatsByUsername(merge['payload']['username'])
             .pipe(
-                map(stats => (console.log('First'), { type: '[STATS] Load Success', payload: stats })),
+                map(stats => ({ type: '[STATS] Load Success', payload: stats })),
                 catchError(() => EMPTY)
             )
         )
@@ -33,7 +33,7 @@ export class UpgradesEffects {
         ofType('[UPGRADES] Get'),
         concatMap(() => this.dataService.getAllUpgrades()
             .pipe(
-                map(upgrades => (console.log('First'), { type: '[UPGRADES] Load Success', payload: upgrades })),
+                map(upgrades => ({ type: '[UPGRADES] Load Success', payload: upgrades })),
                 catchError(() => EMPTY)
             )
         )
@@ -42,7 +42,7 @@ export class UpgradesEffects {
         ofType('[ACTUAL_UPGRADES] Get'),
         concatMap(() => this.dataService.getAllUpgrades()
             .pipe(
-                map(upgrades => (console.log('First'), { type: '[ACTUAL_UPGRADES] Load Success', payload: upgrades })),
+                map(upgrades => ({ type: '[ACTUAL_UPGRADES] Load Success', payload: upgrades })),
                 catchError(() => EMPTY)
             )
         )
@@ -54,7 +54,7 @@ export class UpgradesEffects {
         mergeMap(merge => this.store.select('actualUpgrades')
             .pipe(
                 exhaustMap(actualUpgrades => [
-                    (console.log(actualUpgrades[merge['payload']]), { type: '[STATS] UpdateStatsByUpgrade', payload: { id: merge['payload'], upgrade: actualUpgrades[merge['payload']] } }),
+                    ({ type: '[STATS] UpdateStatsByUpgrade', payload: { id: merge['payload'], upgrade: actualUpgrades[merge['payload']] } }),
                 ]),
             )
         )
@@ -74,7 +74,7 @@ export class UpgradesEffects {
         ofType('[ACTUAL_UPGRADES] Update2'),
         switchMap(merge => this.store.select('upgrades')
             .pipe(
-                switchMap(upgrades => [(console.log(upgrades[merge['payload']['id']]),{ type: '[ACTUAL_UPGRADES] Update', payload: {id: merge['payload']['id'] , basicUpgrades: upgrades[merge['payload']['id']],upgradeLvl: merge['payload']['upgradeLvl'] }})])
+                switchMap(upgrades => [({ type: '[ACTUAL_UPGRADES] Update', payload: {id: merge['payload']['id'] , basicUpgrades: upgrades[merge['payload']['id']],upgradeLvl: merge['payload']['upgradeLvl'] }})])
             )
         ))
     )

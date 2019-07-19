@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { AppState } from 'src/app/store/app.state';
 import { DataService } from 'src/app/_services/data.service';
-import { StatisticActions, UpgradesActions, ActualUpgradesActions, UserStatsIdActions } from '../../store/actions';
+import { StatisticActions, UpgradesActions, ActualUpgradesActions } from '../../store/actions';
 
 @Component({
   selector: 'app-login',
@@ -31,10 +31,11 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
+    this.sc.login(this.login.value).subscribe(res =>{
     this.store.dispatch(new StatisticActions.GetStatistic({username: this.f.username.value}));
-    
     localStorage.setItem('actualUser', this.f.username.value);
     this.router.navigate(['/game']);
+  })
   }
 
   register() {

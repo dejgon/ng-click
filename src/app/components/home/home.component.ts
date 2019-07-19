@@ -17,44 +17,46 @@ export class HomeComponent implements OnInit {
   statistic: Observable<Statistic>;
   upgradeLvl: Observable<any>;
   staticUpgrades: any;
-
+  roundCost: any;
   actualUpgrades: Observable<any>;
   constructor(private store: Store<AppState>, private data: DataService) {
     this.staticUpgrades = store.select('upgrades');
     this.actualUpgrades = store.select('actualUpgrades');
     this.statistic = store.select('statistic');
+    
   }
 
   ngOnInit() {
-  
-    
-       setInterval(() => {   // Save to database (5s)
-         this.upgradeStats();
-       }, 5000)  
+    setInterval(() => {   // Save to database (5s)
+      this.upgradeStats();
+    }, 3000)
     setInterval(() => {  // "tick"
       this.tick();
     }, 1000);
   }
 
   upgradeStats() {
-    
     this.statistic.subscribe(res => {
-      let userStats = {
-        id: res.id,
-        username: res.username,
-        score: res.score,
-        money: res.money,
-        pointsPerClick: res.pointsPerClick,
-        pointsPerSecond: res.pointsPerSecond,
-        clicks: res.clicks,
-        scoreFromClicks: res.scoreFromClicks,
-        scoreFromSecond: res.scoreFromSecond,
-        upgradeLvls: res.upgradesLvls
+      if (res === undefined || res.upgradeLvls === undefined) {
+        console.log("Błędny zapis");
+      } else {
+        console.log("ZAPISYWANIE")
+        let userStats = {
+          id: res.id,
+          username: res.username,
+          score: res.score,
+          money: res.money,
+          pointsPerClick: res.pointsPerClick,
+          pointsPerSecond: res.pointsPerSecond,
+          clicks: res.clicks,
+          scoreFromClicks: res.scoreFromClicks,
+          scoreFromSecond: res.scoreFromSecond,
+          upgradeLvls: res.upgradeLvls
+        }
+        this.data.updateStats(res.id, userStats).subscribe(res => {
+        }), err => { console.log(err) };
       }
-      this.data.updateStats(res.id, userStats).subscribe(res => {
-      }), err => { console.log(err) };
     }).unsubscribe();
-    
   }
 
   click() {
@@ -66,17 +68,18 @@ export class HomeComponent implements OnInit {
   }
 
   upgrade(id: any) {
-    this.statistic.subscribe(resStat=>{
-      this.store.select('actualUpgrades').subscribe(resUpgrades =>{
-        if(resStat.money >= resUpgrades[id].cost ){
+    this.actualUpgrades.subscribe(res=>{
+      this.roundCost = res[0].cost;
+      Math.round(this.roundCost)
+    })
+    this.statistic.subscribe(resStat => {
+      this.store.select('actualUpgrades').subscribe(resUpgrades => {
+        if (resStat.money >= resUpgrades[id].cost) {
           this.store.dispatch(new ActualUpgradesActions.Buy(id));
-        }else{
-          console.log("NIESTAĆCIEKURWIU!")
+        } else {
+          console.log("Cena: " + resUpgrades[id].cost + "!")
         }
       })
-      
     })
-    
-  
   }
 }

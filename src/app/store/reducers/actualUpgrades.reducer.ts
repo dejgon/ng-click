@@ -20,20 +20,26 @@ export function actualUpgradesReducer(state: any, action: ActualUpgradesActions.
     }
 }
 
-function getInitialState(payload: any) {
-    var length = payload['length'];
-    var state = [];
-    for (var i = 0; i < length; i++) {
-        state.push({ cost: 0, pointsPerClick: 0, pointsPerSecond: 0 });
-    }
-    return state;
-}
 function Update(state, payload){
     var newState = state;
-    console.log({Payload: "asdsad"},payload)
-     newState[payload.id].pointsPerClick = (Math.round(payload.upgradeLvl * (payload.basicUpgrades.pointsPerClick * 1.2))*100)/100;
-     newState[payload.id].pointsPerSecond = Math.round(payload.upgradeLvl * (payload.basicUpgrades.pointsPerSecond * 1.0));
-     newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * 1.5));
-    //newState[0].cost = 10000;
+
+    if(payload.upgradeLvl > 30){
+        newState[payload.id].pointsPerClick = Math.round(payload.basicUpgrades.pointsPerClick * (( payload.upgradeLvl/10)+1))
+        newState[payload.id].pointsPerSecond = Math.round(payload.basicUpgrades.pointsPerSecond * (( payload.upgradeLvl/10)+1));
+        newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * (( payload.upgradeLvl/10)-1)));
+    }else if(payload.upgradeLvl > 20){
+        newState[payload.id].pointsPerClick = Math.round(payload.basicUpgrades.pointsPerClick * 4)
+        newState[payload.id].pointsPerSecond = Math.round(payload.basicUpgrades.pointsPerSecond * 4);
+        newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * 1.8));
+    }else if(payload.upgradeLvl > 10){
+        newState[payload.id].pointsPerClick = Math.round(payload.basicUpgrades.pointsPerClick * 2)
+        newState[payload.id].pointsPerSecond = Math.round(payload.basicUpgrades.pointsPerSecond * 2);
+        newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * 1.4));
+    }else{ 
+        newState[payload.id].pointsPerClick = Math.round(payload.basicUpgrades.pointsPerClick)
+        newState[payload.id].pointsPerSecond = Math.round(payload.basicUpgrades.pointsPerSecond)
+        newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * 1.2));
+    }
+    
     return newState;
 }

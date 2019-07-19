@@ -8,7 +8,7 @@ export interface Statistic {
     clicks: number,
     scoreFromClicks: number,
     scoreFromSecond: number,
-    upgradesLvls: [
+    upgradeLvls: [
         {
             upgradeId: number,
             upgradeLvl: number
