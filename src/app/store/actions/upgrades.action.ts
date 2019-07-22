@@ -1,19 +1,18 @@
 import { Action } from '@ngrx/store';
-import { Upgrades } from '../models/upgrades.model';
+import { Upgrades } from '../../store/models';
 
-export const INCREMENT_VALUE = '[VALUE] Increment';
-export const DECREMENT_VALUE = '[VALUE] Decrement';
+export const GET_UPGRADES = '[UPGRADES] Get';
+export const LOAD_SUCCESS = '[UPGRADES] Load Success';
 
-export class IncrementValue implements Action {
-    readonly type = INCREMENT_VALUE
-
-    constructor(public payload: Upgrades) {}
+export class GetUpgrades implements Action {
+    readonly type = GET_UPGRADES
 }
 
-export class DecrementValue implements Action {
-    readonly type = DECREMENT_VALUE
+export class LoadSuccess implements Action {
+    readonly type = LOAD_SUCCESS
 
-    constructor(public payload: Upgrades) {}
+    constructor(public payload: Upgrades[]) {}
 }
 
-export type Actions = IncrementValue | DecrementValue
+
+export type Actions = GetUpgrades | LoadSuccess

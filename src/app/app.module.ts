@@ -1,28 +1,51 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { StoreModule } from '@ngrx/store';
-import { scoreReducer } from './store/reducers/score.reducer';
-import { allScoreReducer } from './store/reducers/allScore.reducer';
-import { multiplierReducer } from './store/reducers/multiplier.reducer';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { NavbarComponent } from './_shared/navbar/navbar.component';
+
+import { actualUpgradesReducer } from './store/reducers/actualUpgrades.reducer';
+import { userStatsIdReducer } from './store/reducers/userStatsId.reducer';
+import { upgradesReducer } from './store/reducers/upgrades.reducer';
+import { DataService } from './_services/data.service';
+
+import { UpgradesEffects } from './store/effects/upgrades.effect';
+import { AuthGuard } from './_guards/auth.guard';
+import { statisticReducer } from './store/reducers/statistic.reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    RegistrationComponent,
+    WelcomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
+    EffectsModule.forRoot([UpgradesEffects]),
     StoreModule.forRoot({
-      score: scoreReducer,
-      allScore: allScoreReducer,
-      multiplier: multiplierReducer
+      upgrades: upgradesReducer,
+      userStatsId: userStatsIdReducer,
+      actualUpgrades: actualUpgradesReducer,
+      statistic: statisticReducer,
     })
   ],
-  providers: [],
+  providers: [DataService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

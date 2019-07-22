@@ -1,0 +1,18 @@
+<div class="container">
+    <form [formGroup]="register" class="needs-validation" >
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" formControlName="username" class="form-control" id="username" aria-describedby="usernameHelp"
+                placeholder="Enter username" #username required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password" #password required>
+        </div>
+        <div class="form-group">
+                <label for="exampleInputPassword2">Repeat password</label>
+                <input type="password" formControlName="repeatPassword" class="form-control invalid" id="exampleInputPassword2" placeholder="Repeat password" #repeatPassword required>
+            </div>
+        <button type="submit" (click)="submit()" class="btn btn-dark">Submit</button>
+    </form>
+</div>

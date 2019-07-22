@@ -1,9 +1,7 @@
-import { Score, AllScore } from './models/score.model';
-import { Upgrades } from './models/upgrades.model';
-import { createFeatureSelector } from '@ngrx/store';
-import { Multiplier } from './models/multiplier.model';
+import { Upgrades, UserStatsId, Statistic } from '../store/models';
 export interface AppState {
-  readonly score: Score;
-  readonly allScore: AllScore;
-  readonly multiplier: Multiplier;
+  readonly upgrades: Upgrades;
+  readonly userStatsId: UserStatsId;
+  readonly actualUpgrades: Upgrades;
+  readonly statistic: Statistic;
 }

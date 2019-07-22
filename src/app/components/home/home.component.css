@@ -17,7 +17,7 @@
 .main-button {
     width: 200px;
     height: 200px;
-    border: 2px solid green;
+    border: 5px solid green;
     margin: 5px;
     text-align: center;
     border-radius: 15px;
@@ -29,11 +29,24 @@
     justify-content: center;
     width: 100px;
     height: 100px;
-    border: 2px solid red;
+    border: 5px solid red;
     border-radius: 15px;
     margin: 5px;
 }
 .button-text {
     font-size: 10px;
     font-weight: bold;
+    margin: 0;
+}
+.name {
+    font-size: 14px;
+}
+.green {
+    border-color: green;
+}
+.red {
+    border-color: red;
+}
+.deactivated {
+    border-color: gray;
 }
