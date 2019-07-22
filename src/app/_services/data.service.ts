@@ -1,32 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
 
-    private url = 'http://192.168.2.223/api';
+    private url = 'https://localhost:44335/api';
     constructor(private http: HttpClient) {}
+    private httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          responseType: 'text' as 'json', 
+        }),
+      };
+      private tokenAuth = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }),
+      }; 
 
     getAllUpgrades(){
         return this.http.get(this.url + '/upgrades')
     }
     login(data) {
-        return this.http.post(this.url + '/login', data)
+        return this.http.post(this.url + '/users/login', data)
     }
     register(data) {
-        return this.http.post(this.url + '/users', data)
+        return this.http.post(this.url + '/users/register', data, this.httpOptions)
     }
     updateStats(id, data){
         return this.http.put(this.url + '/stats/' + id, data)
     }
     getAllStats(){
-        return this.http.get(this.url + '/stats')
+        return this.http.get(this.url + '/users/stats')
     }
     getStatsById(id: any){
         return this.http.get(this.url + "/stats/" + id)
     }
     getStatsByUsername(username: any){
-        return this.http.get(this.url + "/stats/" + username)
+        return this.http.get(this.url + "/Users/" + username, this.tokenAuth)
     }
 
 }

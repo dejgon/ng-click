@@ -1,11 +1,31 @@
+:root {
+    --first-color: #086788;
+    --second-color: #07A0C3;
+    --third-color: #F0C808;
+    --fourth-color: #FFF1D0;
+    --fifth-color: #DD1C1A;
+    --btn-available: #9BE564;
+
+}
+.html {
+    background-color: #FFF1D0;
+}
+.container {
+    background-color: #FFF1D0;
+}
+
 .top{
     height: 100px;
+    background-color: #FFF1D0;
+    color: #086788;
     
 }
 .mid-left{
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 1;
+    background-color: #FFF1D0;
 
 }
 .mid-right{
@@ -13,11 +33,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     height: 100%;
+    flex-grow: 1;
+    background-color: #FFF1D0;
 }
 .main-button {
     width: 200px;
     height: 200px;
-    border: 5px solid green;
+    background-color: #F0C808;
     margin: 5px;
     text-align: center;
     border-radius: 15px;
@@ -29,7 +51,8 @@
     justify-content: center;
     width: 100px;
     height: 100px;
-    border: 5px solid red;
+    border: 5px solid;
+    border-color: #9BE564;
     border-radius: 15px;
     margin: 5px;
 }
@@ -42,10 +65,12 @@
     font-size: 14px;
 }
 .green {
-    border-color: green;
+    border-color: #9BE564;
+    background-color: #9BE564;
 }
 .red {
-    border-color: red;
+    border-color: #DD1C1A;
+    background-color: #DD1C1A;
 }
 .deactivated {
     border-color: gray;

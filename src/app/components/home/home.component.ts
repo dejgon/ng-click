@@ -36,13 +36,11 @@ export class HomeComponent implements OnInit {
 
   upgradeStats() {
     this.statistic.subscribe(res => {
-      if (res === undefined || res.upgradeLvls === undefined) {
+      if (res === undefined || res.upgradeLevels === undefined) {
         console.log("Błędny zapis");
       } else {
         console.log("ZAPISYWANIE")
         let userStats = {
-          id: res.id,
-          username: res.username,
           score: res.score,
           money: res.money,
           pointsPerClick: res.pointsPerClick,
@@ -50,10 +48,8 @@ export class HomeComponent implements OnInit {
           clicks: res.clicks,
           scoreFromClicks: res.scoreFromClicks,
           scoreFromSecond: res.scoreFromSecond,
-          upgradeLvls: res.upgradeLvls
+          upgradeLevels: res.upgradeLevels
         }
-        this.data.updateStats(res.id, userStats).subscribe(res => {
-        }), err => { console.log(err) };
       }
     }).unsubscribe();
   }

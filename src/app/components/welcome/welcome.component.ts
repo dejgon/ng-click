@@ -14,7 +14,7 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     this.sc.getAllStats().subscribe(res => {
-      for (let item of res['values']) {
+      for (let item of res['stats']) {
         var obj = {
           username: item.username,
           score: item.score

@@ -40,6 +40,6 @@ function UpdateStatsByUpgrade(state, payload){
     newState.pointsPerClick += payload.upgrade.pointsPerClick;
     newState.pointsPerSecond += payload.upgrade.pointsPerSecond;
     newState.money -= payload.upgrade.cost;
-    newState.upgradeLvls[payload.id].upgradeLvl += 1;
+    newState.upgradeLevels[payload.id].upgradeLvl += 1;
     return newState;
 }
