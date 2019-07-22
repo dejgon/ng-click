@@ -3,7 +3,6 @@ import { UserStatsId } from '../../store/models';
 
 export const SAVE_USER_STATS_ID = '[UserStatsId] Save';
 
-
 export class SaveUserStatsId implements Action {
     readonly type = SAVE_USER_STATS_ID
 

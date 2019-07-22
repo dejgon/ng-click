@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ActualUpgrades } from '../../store/models';
+import { Upgrades } from '../../store/models';
 
 export const CHANGE_ACTUAL_UPGRADES = '[ACTUAL_UPGRADES] Change';
 export const LOAD_SUCCESS = '[ACTUAL_UPGRADES] Load Success';
@@ -16,12 +16,12 @@ export class Buy implements Action {
 export class ChangeActualUpgradesValue implements Action {
     readonly type = CHANGE_ACTUAL_UPGRADES
 
-    constructor(public payload: ActualUpgrades) {}
+    constructor(public payload: Upgrades) {}
 }
 export class LoadSuccess implements Action {
     readonly type = LOAD_SUCCESS
 
-    constructor(public payload: ActualUpgrades[]){}
+    constructor(public payload: Upgrades[]){}
 }
 export class Update implements Action {
     readonly type = UPDATE

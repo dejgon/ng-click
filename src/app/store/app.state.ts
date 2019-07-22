@@ -1,7 +1,7 @@
-import { Upgrades, UserStatsId, Statistic, ActualUpgrades } from '../store/models';
+import { Upgrades, UserStatsId, Statistic } from '../store/models';
 export interface AppState {
   readonly upgrades: Upgrades;
   readonly userStatsId: UserStatsId;
-  readonly actualUpgrades: ActualUpgrades;
+  readonly actualUpgrades: Upgrades;
   readonly statistic: Statistic;
 }

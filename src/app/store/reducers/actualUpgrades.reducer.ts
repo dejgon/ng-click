@@ -1,5 +1,5 @@
 import { ActualUpgradesActions } from '../actions';
-import { ActualUpgrades, Upgrades } from '../../store/models';
+import {  Upgrades } from '../../store/models';
 
 export function actualUpgradesReducer(state: any, action: ActualUpgradesActions.Actions) {
     switch (action.type) {
@@ -21,25 +21,28 @@ export function actualUpgradesReducer(state: any, action: ActualUpgradesActions.
 }
 
 function Update(state, payload){
-    var newState = state;
+    var id = payload.id
+    var basicPPC = payload.basicUpgrades.pointsPerClick
+    var basicPPS = payload.basicUpgrades.pointsPerSecond
+    var basicC = payload.basicUpgrades.cost
+    var actualLvl = payload.upgradeLvl
 
-    if(payload.upgradeLvl > 30){
-        newState[payload.id].pointsPerClick = Math.round(payload.basicUpgrades.pointsPerClick * (( payload.upgradeLvl/10)+1))
-        newState[payload.id].pointsPerSecond = Math.round(payload.basicUpgrades.pointsPerSecond * (( payload.upgradeLvl/10)+1));
-        newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * (( payload.upgradeLvl/10)-1)));
-    }else if(payload.upgradeLvl > 20){
-        newState[payload.id].pointsPerClick = Math.round(payload.basicUpgrades.pointsPerClick * 4)
-        newState[payload.id].pointsPerSecond = Math.round(payload.basicUpgrades.pointsPerSecond * 4);
-        newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * 1.8));
-    }else if(payload.upgradeLvl > 10){
-        newState[payload.id].pointsPerClick = Math.round(payload.basicUpgrades.pointsPerClick * 2)
-        newState[payload.id].pointsPerSecond = Math.round(payload.basicUpgrades.pointsPerSecond * 2);
-        newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * 1.4));
+    if(actualLvl > 30){
+        state[id].pointsPerClick = Math.round(basicPPC * (( actualLvl/10)+1))
+        state[id].pointsPerSecond = Math.round(basicPPS * (( actualLvl/10)+1));
+        state[id].cost = Math.round(actualLvl * (basicC * (( actualLvl/10)-1)));
+    }else if(actualLvl > 20){
+        state[id].pointsPerClick = Math.round(basicPPC * 4)
+        state[id].pointsPerSecond = Math.round(basicPPS * 4);
+        state[id].cost = Math.round(actualLvl * (basicC * 1.8));
+    }else if(actualLvl > 10){
+        state[id].pointsPerClick = Math.round(basicPPC * 2)
+        state[id].pointsPerSecond = Math.round(basicPPS * 2);
+        state[id].cost = Math.round(actualLvl * (basicC * 1.4));
     }else{ 
-        newState[payload.id].pointsPerClick = Math.round(payload.basicUpgrades.pointsPerClick)
-        newState[payload.id].pointsPerSecond = Math.round(payload.basicUpgrades.pointsPerSecond)
-        newState[payload.id].cost = Math.round(payload.upgradeLvl * (payload.basicUpgrades.cost * 1.2));
+        state[id].pointsPerClick = Math.round(basicPPC)
+        state[id].pointsPerSecond = Math.round(basicPPS)
+        state[id].cost = Math.round(actualLvl * (basicC * 1.2));
     }
-    
-    return newState;
+    return state;
 }

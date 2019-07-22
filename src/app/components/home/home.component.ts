@@ -17,17 +17,16 @@ export class HomeComponent implements OnInit {
   statistic: Observable<Statistic>;
   upgradeLvl: Observable<any>;
   staticUpgrades: any;
-  roundCost: any;
   actualUpgrades: Observable<any>;
   constructor(private store: Store<AppState>, private data: DataService) {
     this.staticUpgrades = store.select('upgrades');
     this.actualUpgrades = store.select('actualUpgrades');
     this.statistic = store.select('statistic');
-    
   }
 
   ngOnInit() {
-    setInterval(() => {   // Save to database (5s)
+    
+    setInterval(() => {   // Save to database
       this.upgradeStats();
     }, 3000)
     setInterval(() => {  // "tick"
@@ -68,16 +67,12 @@ export class HomeComponent implements OnInit {
   }
 
   upgrade(id: any) {
-    this.actualUpgrades.subscribe(res=>{
-      this.roundCost = res[0].cost;
-      Math.round(this.roundCost)
-    })
     this.statistic.subscribe(resStat => {
       this.store.select('actualUpgrades').subscribe(resUpgrades => {
         if (resStat.money >= resUpgrades[id].cost) {
           this.store.dispatch(new ActualUpgradesActions.Buy(id));
         } else {
-          console.log("Cena: " + resUpgrades[id].cost + "!")
+          console.log("Brakuje Ci: " + [resUpgrades[id].cost - resStat.money] + "!")
         }
       })
     })

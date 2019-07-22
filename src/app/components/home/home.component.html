@@ -5,6 +5,7 @@
                 <h1>Your score: {{(statistic | async)?.score}}</h1>
                 <p> Money per Click {{(statistic | async)?.pointsPerClick}}</p>
                 <p> Money per Click {{(statistic | async)?.pointsPerSecond}}</p>
+
             </div>
         </div>
     </div>
@@ -17,27 +18,19 @@
             </div>
             <div>
                 <h1>${{(statistic | async)?.money}}</h1>
-                <h1>{{roundCost}}</h1>
-                
             </div>
         </div>
         <div class="mid-right col-4">
-            <div class="shop-button"  *ngFor="let item of actualUpgrades | async; let i = index;" (click)="upgrade(i)">
-                <p class="button-text name">{{(actualUpgrades | async)[i]?.name}}</p>
-                <p class="button-text">Lvl: {{(statistic | async)?.upgradeLvls[i].upgradeLvl}}</p>
-                <p class="button-text">Stats: {{(actualUpgrades | async)[i]?.pointsPerClick}}/{{(actualUpgrades | async)[i]?.pointsPerSecond}}</p>
-                <p class="button-text">Cost: {{(actualUpgrades | async)[i]?.cost}}$</p>
+            <div *ngFor="let item of actualUpgrades | async; let i = index;" (click)="upgrade(i)">
+                <div class="shop-button" *ngIf="((statistic | async)?.score >= (i * 1000))" [ngClass]="((statistic | async)?.money >= (actualUpgrades | async)[i]?.cost)?'green':'red'">
+                    <p class="button-text name">{{(actualUpgrades | async)[i]?.name}}</p>
+                    <p class="button-text">Lvl: {{(statistic | async)?.upgradeLvls[i].upgradeLvl}}</p>
+                    <p class="button-text">Stats:
+                        {{(actualUpgrades | async)[i]?.pointsPerClick}}/{{(actualUpgrades | async)[i]?.pointsPerSecond}}
+                    </p>
+                    <p class="button-text">Cost: {{(actualUpgrades | async)[i]?.cost}}$</p>
+                </div>
             </div>
-            <!--
-                <div class="shop-button" (click)="upgradeSeconds()">
-                <p>+1/s</p>
-                <p>100$</p>
-            </div>
-            <div class="shop-button"><a value="spl1" (click)="upgrade()"></a></div>
-            <div class="shop-button"><a value="spl1" (click)="upgrade()"></a></div>
-            -->
-
         </div>
     </div>
-
 </div>
