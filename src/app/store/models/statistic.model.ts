@@ -6,6 +6,7 @@ export interface Statistic {
     clicks: number,
     scoreFromClicks: number,
     scoreFromSecond: number,
+    timePlayed: number,
     upgradeLevels: [
         {
             upgradeId: number,

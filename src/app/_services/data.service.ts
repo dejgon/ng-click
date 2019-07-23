@@ -5,19 +5,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DataService {
 
     private url = 'https://localhost:44335/api';
+    private token = 'Bearer ' + localStorage.getItem('token');
+    private tokenAuth: any;
+    private tokenAuth2: any;
     constructor(private http: HttpClient) { }
-    private httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            responseType: 'text' as 'json',
-        }),
-    };
-    private tokenAuth = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token'),
-        }),
-    };
 
     getAllUpgrades() {
         return this.http.get(this.url + '/upgrades')
@@ -26,10 +17,16 @@ export class DataService {
         return this.http.post(this.url + '/users/login', data)
     }
     register(data) {
-        return this.http.post(this.url + '/users/register', data, this.httpOptions)
+        return this.http.post(this.url + '/users/register', data)
     }
-    updateStats(id, data) {
-        return this.http.put(this.url + '/stats/' + id, data)
+    updateStats(username, data, token2) {
+        this.tokenAuth2 = {
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token2,
+            }),
+        };
+        return this.http.put(this.url + '/users/update/' + username, data, this.tokenAuth2)
     }
     getAllStats() {
         return this.http.get(this.url + '/users/stats')
@@ -37,9 +34,13 @@ export class DataService {
     getStatsById(id: any) {
         return this.http.get(this.url + "/user/stats/" + id)
     }
-    getStatsByUsername(username: any) {
-        console.log(localStorage.getItem("token"));
-        console.log(this.tokenAuth);
-        return this.http.get(this.url + "/Users/" + username,this.tokenAuth)
+    getStatsByUsername(username: any, token2: any) {
+         this.tokenAuth = {
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token2,
+            }),
+        };
+        return this.http.get(this.url + "/Users/" + username, this.tokenAuth)
     }
 }

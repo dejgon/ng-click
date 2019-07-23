@@ -21,7 +21,7 @@ export class UpgradesEffects {
 
     loadStatistic$ = createEffect(() => this.actions$.pipe(
         ofType('[STATS] Get'),
-        concatMap(merge => this.dataService.getStatsByUsername(merge['payload']['username'])
+        concatMap(merge => this.dataService.getStatsByUsername(merge['payload']['username'], localStorage.getItem('token'))
             .pipe(
                 map(stats => ({ type: '[STATS] Load Success', payload: stats })),
                 catchError(() => EMPTY)
@@ -63,7 +63,7 @@ export class UpgradesEffects {
         ofType('[STATS] UpdateStatsByUpgrade'),
         mergeMap(merge => this.store.select('statistic')
             .pipe(
-                exhaustMap(stats => [{ type: '[ACTUAL_UPGRADES] Update2', payload: { id: merge['payload']['id'], upgradeLvl: stats['upgradeLvls'][merge['payload']['id']]['upgradeLvl']} }])
+                exhaustMap(stats => [({ type: '[ACTUAL_UPGRADES] Update2', payload: { id: merge['payload']['id'], upgradeLvl: stats['upgradeLevels'][merge['payload']['id']]['upgradeLvl']} })])
             )
         ))
     )

@@ -9,8 +9,6 @@ export function statisticReducer(state: any, action: StatisticActions.Actions) {
         case StatisticActions.GET_STATISTIC:
             return state;
         case StatisticActions.LOAD_SUCCESS:
-            console.log(state);
-            console.log(action.payload)
             return state = action.payload;
         case StatisticActions.CLICK_EVENT:
             return ClickEvent(state);
@@ -35,6 +33,7 @@ function TickEvent(state){
     newState.score += state.pointsPerSecond;
     newState.money += state.pointsPerSecond;
     newState.scoreFromSecond += state.pointsPerSecond;
+    newState.timePlayed += 1;
     return newState;
 }
 function UpdateStatsByUpgrade(state, payload){

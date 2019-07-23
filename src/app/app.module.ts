@@ -21,6 +21,7 @@ import { DataService } from './_services/data.service';
 import { UpgradesEffects } from './store/effects/upgrades.effect';
 import { AuthGuard } from './_guards/auth.guard';
 import { statisticReducer } from './store/reducers/statistic.reducer';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { statisticReducer } from './store/reducers/statistic.reducer';
     LoginComponent,
     RegistrationComponent,
     WelcomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

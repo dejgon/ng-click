@@ -1,11 +1,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="top col-12">
-            <div>
-                <h1>Your score: {{(statistic | async)?.score}}</h1>
-                <p> Money per Click {{(statistic | async)?.pointsPerClick}}</p>
-                <p> Money per Second {{(statistic | async)?.pointsPerSecond}}</p>
-
+            <div *ngIf="window">
+                <p>Welcome {{username}}</p>
+                <p>Your statistics:</p>
+                <h3>Your score: {{(statistic | async)?.score}}</h3>
+                <p>Money/click: {{(statistic | async)?.pointsPerClick}}</p>
+                <p>Money/s: {{(statistic | async)?.pointsPerSecond}}</p>
+                <p>Time played: {{(statistic | async)?.timePlayed}} seconds</p>
+                <p>Clicks: {{(statistic | async)?.clicks}}</p>
+                <p>Score/clicks: {{( statistic | async)?.scoreFromClicks}}</p>
+                <p>Score/sec: {{( statistic | async)?.scoreFromSecond}}</p>
             </div>
         </div>
     </div>
@@ -24,7 +29,7 @@
             <div *ngFor="let item of actualUpgrades | async; let i = index;" (click)="upgrade(i)">
                 <div class="shadow p-3 mb-5 shop-button" *ngIf="((statistic | async)?.score >= (i * 1000))" [ngClass]="((statistic | async)?.money >= (actualUpgrades | async)[i]?.cost)?'green':'red'">
                     <p class="button-text name">{{(actualUpgrades | async)[i]?.name}}</p>
-                    <p class="button-text">Lvl: {{(statistic | async)?.upgradeLvls[i].upgradeLvl}}</p>
+                    <p class="button-text">Lvl: {{(statistic | async)?.upgradeLevels[i].upgradeLvl}}</p>
                     <p class="button-text">Stats:
                         {{(actualUpgrades | async)[i]?.pointsPerClick}}/{{(actualUpgrades | async)[i]?.pointsPerSecond}}
                     </p>

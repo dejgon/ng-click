@@ -15,10 +15,20 @@
 }
 
 .top{
-    height: 150px;
+    display: flex;
+    flex-direction: row;
+    height: 30%;
     background-color: #FFF1D0;
     color: #086788;
-    
+    font-size: 13px;
+    margin: none;
+}
+p {
+    margin: 0;
+}
+.window {
+    display: flex;
+    flex-direction: row;
 }
 .mid-left{
     display: flex;

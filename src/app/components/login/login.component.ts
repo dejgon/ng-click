@@ -26,16 +26,15 @@ export class LoginComponent implements OnInit {
     })
   }
   ngOnInit() {
-    this.store.dispatch(new UpgradesActions.GetUpgrades());
-    this.store.dispatch(new ActualUpgradesActions.GetUpgrades());
+    localStorage.setItem('token', 'ssadsa');
   }
 
   submit() {
     this.sc.login(this.login.value).subscribe(res => {
+      localStorage.clear();
       localStorage.setItem('token', res['token']);
       localStorage.setItem('user', this.f.username.value);
-      this.store.dispatch(new StatisticActions.GetStatistic({ username: this.f.username.value }));
-      this.router.navigate(['/game']);
+      this.router.navigate(['/loading']);
     })
   }
 
