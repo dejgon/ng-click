@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   }
   clear() {
     localStorage.removeItem('aaa');
-    localStorage.removeItem('actualUser');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
 }

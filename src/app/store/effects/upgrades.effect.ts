@@ -33,7 +33,7 @@ export class UpgradesEffects {
         ofType('[UPGRADES] Get'),
         concatMap(() => this.dataService.getAllUpgrades()
             .pipe(
-                map(upgrades => (console.log(upgrades),{ type: '[UPGRADES] Load Success', payload: upgrades })),
+                map(upgrades => ({ type: '[UPGRADES] Load Success', payload: upgrades })),
                 catchError(() => EMPTY)
             )
         )

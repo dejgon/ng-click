@@ -25,10 +25,16 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+   
+    this.store.dispatch(new StatisticActions.GetStatistic({ username: localStorage.getItem('user')}));
+    this.statistic.subscribe(res=>{
+      console.log(res)
+    })
+    /*
     setInterval(() => {   // Save to database
       this.upgradeStats();
     }, 3000)
+    */
     setInterval(() => {  // "tick"
       this.tick();
     }, 1000);

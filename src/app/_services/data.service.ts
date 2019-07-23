@@ -5,21 +5,21 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DataService {
 
     private url = 'https://localhost:44335/api';
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
     private httpOptions = {
         headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          responseType: 'text' as 'json', 
+            'Content-Type': 'application/json',
+            responseType: 'text' as 'json',
         }),
-      };
-      private tokenAuth = {
+    };
+    private tokenAuth = {
         headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
         }),
-      }; 
+    };
 
-    getAllUpgrades(){
+    getAllUpgrades() {
         return this.http.get(this.url + '/upgrades')
     }
     login(data) {
@@ -28,17 +28,18 @@ export class DataService {
     register(data) {
         return this.http.post(this.url + '/users/register', data, this.httpOptions)
     }
-    updateStats(id, data){
+    updateStats(id, data) {
         return this.http.put(this.url + '/stats/' + id, data)
     }
-    getAllStats(){
+    getAllStats() {
         return this.http.get(this.url + '/users/stats')
     }
-    getStatsById(id: any){
-        return this.http.get(this.url + "/stats/" + id)
+    getStatsById(id: any) {
+        return this.http.get(this.url + "/user/stats/" + id)
     }
-    getStatsByUsername(username: any){
-        return this.http.get(this.url + "/Users/" + username, this.tokenAuth)
+    getStatsByUsername(username: any) {
+        console.log(localStorage.getItem("token"));
+        console.log(this.tokenAuth);
+        return this.http.get(this.url + "/Users/" + username,this.tokenAuth)
     }
-
 }

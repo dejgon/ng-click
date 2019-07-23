@@ -31,13 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.sc.login(this.login.value).subscribe(res =>{
-      console.log(res);
-    this.store.dispatch(new StatisticActions.GetStatistic({username: this.f.username.value}));
-    localStorage.setItem('user', this.f.username.value);
-    localStorage.setItem('token', res['token']);
-    this.router.navigate(['/game']);
-  })
+    this.sc.login(this.login.value).subscribe(res => {
+      localStorage.setItem('token', res['token']);
+      localStorage.setItem('user', this.f.username.value);
+      this.store.dispatch(new StatisticActions.GetStatistic({ username: this.f.username.value }));
+      this.router.navigate(['/game']);
+    })
   }
 
   register() {

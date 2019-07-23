@@ -9,6 +9,8 @@ export function statisticReducer(state: any, action: StatisticActions.Actions) {
         case StatisticActions.GET_STATISTIC:
             return state;
         case StatisticActions.LOAD_SUCCESS:
+            console.log(state);
+            console.log(action.payload)
             return state = action.payload;
         case StatisticActions.CLICK_EVENT:
             return ClickEvent(state);
