@@ -10,14 +10,12 @@ import { UpgradesActions, ActualUpgradesActions } from '../actions';
 
 @Injectable()
 export class UpgradesEffects {
-    
+
     constructor(
         private actions$: Actions,
         private dataService: DataService,
         private store: Store<AppState>,
-    ) {
-    
-     }
+    ) { }
 
     loadStatistic$ = createEffect(() => this.actions$.pipe(
         ofType('[STATS] Get'),
@@ -38,6 +36,7 @@ export class UpgradesEffects {
             )
         )
     ));
+
     loadActualUpgrades$ = createEffect(() => this.actions$.pipe(
         ofType('[ACTUAL_UPGRADES] Get'),
         concatMap(() => this.dataService.getAllUpgrades()
@@ -47,7 +46,6 @@ export class UpgradesEffects {
             )
         )
     ));
-
 
     buyUpgrade$ = createEffect(() => this.actions$.pipe(
         ofType('[ACTUAL_UPGRADES] Buy'),
@@ -59,26 +57,22 @@ export class UpgradesEffects {
             )
         )
     ))
+
     updateUpgrades$ = createEffect(() => this.actions$.pipe(
         ofType('[STATS] UpdateStatsByUpgrade'),
         mergeMap(merge => this.store.select('statistic')
             .pipe(
-                exhaustMap(stats => [({ type: '[ACTUAL_UPGRADES] Update2', payload: { id: merge['payload']['id'], upgradeLvl: stats['upgradeLevels'][merge['payload']['id']]['upgradeLvl']} })])
+                exhaustMap(stats => [({ type: '[ACTUAL_UPGRADES] InicialNextUpdate', payload: { id: merge['payload']['id'], upgradeLvl: stats['upgradeLevels'][merge['payload']['id']]['upgradeLvl'] } })])
             )
         ))
     )
 
-
-   
     updateUpgrades2$ = createEffect(() => this.actions$.pipe(
-        ofType('[ACTUAL_UPGRADES] Update2'),
+        ofType('[ACTUAL_UPGRADES] InicialNextUpdate'),
         switchMap(merge => this.store.select('upgrades')
             .pipe(
-                switchMap(upgrades => [({ type: '[ACTUAL_UPGRADES] Update', payload: {id: merge['payload']['id'] , basicUpgrades: upgrades[merge['payload']['id']],upgradeLvl: merge['payload']['upgradeLvl'] }})])
+                switchMap(upgrades => [({ type: '[ACTUAL_UPGRADES] Update', payload: { id: merge['payload']['id'], basicUpgrades: upgrades[merge['payload']['id']], upgradeLvl: merge['payload']['upgradeLvl'] } })])
             )
         ))
     )
-
-
-
 }

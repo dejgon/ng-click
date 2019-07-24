@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, createSelector } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { AppState } from '../../store/app.state';
 import { Statistic, Upgrades } from '../../store/models';
@@ -13,7 +13,6 @@ import { DataService } from '../../_services/data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
   statistic: Observable<Statistic>;
   upgradeLvl: Observable<any>;
   staticUpgrades: any;
@@ -21,7 +20,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   timer1: any;
   timer2: any;
   text: string = "Hide";
-  time: any;
   clicksPerSecond: Observable<any>;
   window: boolean = true;
   username: string = localStorage.getItem('user');
@@ -32,36 +30,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
     this.store.dispatch(new UpgradesActions.GetUpgrades());
     this.store.dispatch(new ActualUpgradesActions.GetUpgrades());
-    this.store.dispatch(new StatisticActions.GetStatistic({username: localStorage.getItem('user')}));
+    this.store.dispatch(new StatisticActions.GetStatistic({ username: localStorage.getItem('user') }));
     this.timer1 = setInterval(() => {   // Save to database
       this.upgradeStats();
     }, 1000)
-
     this.timer2 = setInterval(() => {  // "tick"
       this.tick();
     }, 1000);
   }
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     clearInterval(this.timer1);
     clearInterval(this.timer2);
     localStorage.removeItem('token');
   }
-
-    toHHMMSS(value) {
-    var hours   = Math.floor(value / 3600);
-    var minutes = Math.floor((value - (hours * 3600)) / 60);
-    var seconds = value - (hours * 3600) - (minutes * 60);
-    var hh:string;
-    var mm: string;
-    var ss: string;
-    if (hours   < 10) {hh = "0"+ hours;}
-    if (minutes < 10) {mm = "0"+minutes;}
-    if (seconds < 10) {ss = "0"+seconds;}
-    return hh+':'+mm+':'+ss;
-}
 
   upgradeStats() {
     this.statistic.subscribe(res => {
@@ -79,17 +63,17 @@ export class HomeComponent implements OnInit, OnDestroy {
           timePlayed: res.timePlayed,
           upgradeLevels: res.upgradeLevels
         }
-        this.data.updateStats(localStorage.getItem('user'), userStats, localStorage.getItem('token')).subscribe(res=>{
+        this.data.updateStats(localStorage.getItem('user'), userStats, localStorage.getItem('token')).subscribe(res => {
         })
       }
     }).unsubscribe();
   }
 
-  openWindow(){
+  openWindow() {
     this.window = !this.window;
-    if(this.window == true){
+    if (this.window == true) {
       this.text = "Hide"
-    }else{
+    } else {
       this.text = "Open"
     }
   }
@@ -99,21 +83,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   tick() {
     this.store.dispatch(new StatisticActions.TickEvent());
-    this.statistic.subscribe(res=>{
-     this.time = this.statistic.subscribe(res => {
-        let value = res.timePlayed;
-        var hours   = Math.floor(value / 3600);
-        var minutes = Math.floor((value - (hours * 3600)) / 60);
-        var seconds = value - (hours * 3600) - (minutes * 60);
-        var hh:string;
-        var mm: string;
-        var ss: string;
-        if (hours   < 10) {hh = "0"+ hours;}
-        if (minutes < 10) {mm = "0"+minutes;}
-        if (seconds < 10) {ss = "0"+seconds;}
-        return hh+':'+mm+':'+ss;
-      }).unsubscribe();
-    })
   }
 
   upgrade(id: any) {

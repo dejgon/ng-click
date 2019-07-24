@@ -1,6 +1,5 @@
 import { UpgradesActions } from '../actions';
 
-
 export function upgradesReducer(state: any, action: UpgradesActions.Actions) {
     switch (action.type) {
         case UpgradesActions.LOAD_SUCCESS:  

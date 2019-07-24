@@ -14,7 +14,6 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NavbarComponent } from './_shared/navbar/navbar.component';
 
 import { actualUpgradesReducer } from './store/reducers/actualUpgrades.reducer';
-import { userStatsIdReducer } from './store/reducers/userStatsId.reducer';
 import { upgradesReducer } from './store/reducers/upgrades.reducer';
 import { DataService } from './_services/data.service';
 
@@ -42,7 +41,6 @@ import { LoadingComponent } from './components/loading/loading.component';
     EffectsModule.forRoot([UpgradesEffects]),
     StoreModule.forRoot({
       upgrades: upgradesReducer,
-      userStatsId: userStatsIdReducer,
       actualUpgrades: actualUpgradesReducer,
       statistic: statisticReducer,
     })

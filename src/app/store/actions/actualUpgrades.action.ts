@@ -4,7 +4,7 @@ import { Upgrades } from '../../store/models';
 export const CHANGE_ACTUAL_UPGRADES = '[ACTUAL_UPGRADES] Change';
 export const LOAD_SUCCESS = '[ACTUAL_UPGRADES] Load Success';
 export const UPDATE = '[ACTUAL_UPGRADES] Update';
-export const UPDATE2 = '[ACTUAL_UPGRADES] Update2';
+export const INITIAL_UPDATE = '[ACTUAL_UPGRADES] InicialNextUpdate';
 export const BUY = '[ACTUAL_UPGRADES] Buy';
 export const GET_UPGRADES = '[ACTUAL_UPGRADES] Get';
 
@@ -29,7 +29,7 @@ export class Update implements Action {
     constructor(public payload: {id: number, basicUpgrades: any, upgradeLvl: number}){};
 }
 export class Update2 implements Action {
-    readonly type = UPDATE2
+    readonly type = INITIAL_UPDATE
 }
 
 export class GetUpgrades implements Action {

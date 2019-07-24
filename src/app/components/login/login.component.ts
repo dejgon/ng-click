@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 
 import { AppState } from 'src/app/store/app.state';
 import { DataService } from 'src/app/_services/data.service';
-import { StatisticActions, UpgradesActions, ActualUpgradesActions } from '../../store/actions';
 
 @Component({
   selector: 'app-login',
@@ -21,12 +20,11 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private sc: DataService) {
     this.login = this.fb.group({
-      username: ['1'],
-      password: ['1']
+      username: [''],
+      password: ['']
     })
   }
   ngOnInit() {
-    localStorage.setItem('token', 'ssadsa');
   }
 
   submit() {

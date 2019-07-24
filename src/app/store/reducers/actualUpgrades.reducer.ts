@@ -1,5 +1,4 @@
 import { ActualUpgradesActions } from '../actions';
-import {  Upgrades } from '../../store/models';
 
 export function actualUpgradesReducer(state: any, action: ActualUpgradesActions.Actions) {
     switch (action.type) {
@@ -11,7 +10,7 @@ export function actualUpgradesReducer(state: any, action: ActualUpgradesActions.
             return state = action.payload;
         case ActualUpgradesActions.UPDATE:
             return Update(state, action.payload);
-        case ActualUpgradesActions.UPDATE2:
+        case ActualUpgradesActions.INITIAL_UPDATE:
             return state;
         case ActualUpgradesActions.BUY:
             return state;

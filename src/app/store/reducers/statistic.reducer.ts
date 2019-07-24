@@ -1,7 +1,4 @@
 import { StatisticActions } from '../actions';
-import { Statistic } from '../../store/models';
-
-const initialStateClick = null;
 
 export function statisticReducer(state: any, action: StatisticActions.Actions) {
 
