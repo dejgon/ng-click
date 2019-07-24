@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
     })
   }
   ngOnInit() {
+    this.store.subscribe(res=>{
+      console.log(res)
+    }).unsubscribe();
   }
 
   submit() {

@@ -30,6 +30,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+   
+
+
+
     this.store.dispatch(new UpgradesActions.GetUpgrades());
     this.store.dispatch(new ActualUpgradesActions.GetUpgrades());
     this.store.dispatch(new StatisticActions.GetStatistic({ username: localStorage.getItem('user') }));
@@ -39,6 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.timer2 = setInterval(() => {  // "tick"
       this.tick();
     }, 1000);
+   
   }
 
   ngOnDestroy() {

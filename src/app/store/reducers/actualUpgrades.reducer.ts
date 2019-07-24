@@ -20,28 +20,17 @@ export function actualUpgradesReducer(state: any, action: ActualUpgradesActions.
 }
 
 function Update(state, payload){
-    var id = payload.id
+    var upgrade_id = payload.id
     var basicPPC = payload.basicUpgrades.pointsPerClick
     var basicPPS = payload.basicUpgrades.pointsPerSecond
-    var basicC = payload.basicUpgrades.cost
+    var basicCost = payload.basicUpgrades.cost
     var actualLvl = payload.upgradeLvl
+    var przelicznikPPC = Math.round(actualLvl/5);
+    var przelicznikCost = 1 + Math.round(actualLvl/5) * 0.1;
 
-    if(actualLvl > 30){
-        state[id].pointsPerClick = Math.round(basicPPC * (( actualLvl/10)+1))
-        state[id].pointsPerSecond = Math.round(basicPPS * (( actualLvl/10)+1));
-        state[id].cost = Math.round(actualLvl * (basicC * (( actualLvl/10)-1)));
-    }else if(actualLvl > 20){
-        state[id].pointsPerClick = Math.round(basicPPC * 4)
-        state[id].pointsPerSecond = Math.round(basicPPS * 4);
-        state[id].cost = Math.round(actualLvl * (basicC * 1.8));
-    }else if(actualLvl > 10){
-        state[id].pointsPerClick = Math.round(basicPPC * 2)
-        state[id].pointsPerSecond = Math.round(basicPPS * 2);
-        state[id].cost = Math.round(actualLvl * (basicC * 1.4));
-    }else{ 
-        state[id].pointsPerClick = Math.round(basicPPC)
-        state[id].pointsPerSecond = Math.round(basicPPS)
-        state[id].cost = Math.round(actualLvl * (basicC * 1.2));
-    }
+    state[upgrade_id].pointsPerClick = Math.round(basicPPC * przelicznikPPC)
+    state[upgrade_id].pointsPerSecond = Math.round(basicPPS * przelicznikPPC)
+    state[upgrade_id].cost = Math.round(actualLvl * (basicCost * przelicznikCost));
+
     return state;
 }

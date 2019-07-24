@@ -56,7 +56,7 @@ export class UpgradesEffects {
                 ]),
             )
         )
-    ))
+    ));
 
     updateUpgrades$ = createEffect(() => this.actions$.pipe(
         ofType('[STATS] UpdateStatsByUpgrade'),
@@ -64,8 +64,8 @@ export class UpgradesEffects {
             .pipe(
                 exhaustMap(stats => [({ type: '[ACTUAL_UPGRADES] InicialNextUpdate', payload: { id: merge['payload']['id'], upgradeLvl: stats['upgradeLevels'][merge['payload']['id']]['upgradeLvl'] } })])
             )
-        ))
-    )
+        )
+    ));
 
     updateUpgrades2$ = createEffect(() => this.actions$.pipe(
         ofType('[ACTUAL_UPGRADES] InicialNextUpdate'),
@@ -73,6 +73,6 @@ export class UpgradesEffects {
             .pipe(
                 switchMap(upgrades => [({ type: '[ACTUAL_UPGRADES] Update', payload: { id: merge['payload']['id'], basicUpgrades: upgrades[merge['payload']['id']], upgradeLvl: merge['payload']['upgradeLvl'] } })])
             )
-        ))
-    )
+        )
+    ));
 }

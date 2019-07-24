@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DataService {
 
     private url = 'https://localhost:44335/api';
+    private url2 = 'http://192.168.2.223/api';
     private token = 'Bearer ' + localStorage.getItem('token');
     private tokenAuth: any;
     private tokenAuth2: any;

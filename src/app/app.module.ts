@@ -21,6 +21,7 @@ import { UpgradesEffects } from './store/effects/upgrades.effect';
 import { AuthGuard } from './_guards/auth.guard';
 import { statisticReducer } from './store/reducers/statistic.reducer';
 import { LoadingComponent } from './components/loading/loading.component';
+import { clearState } from './store/reducers/logout.reducer';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,11 @@ import { LoadingComponent } from './components/loading/loading.component';
       upgrades: upgradesReducer,
       actualUpgrades: actualUpgradesReducer,
       statistic: statisticReducer,
-    })
+    },
+    {
+      metaReducers: [clearState]
+    }),
+    
   ],
   providers: [DataService, AuthGuard],
   bootstrap: [AppComponent]
