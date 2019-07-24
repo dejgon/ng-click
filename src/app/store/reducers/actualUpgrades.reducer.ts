@@ -26,7 +26,7 @@ function Update(state, payload){
     var basicCost = payload.basicUpgrades.cost
     var actualLvl = payload.upgradeLvl
     var przelicznikPPC = Math.round(actualLvl/5);
-    var przelicznikCost = 1 + Math.round(actualLvl/5) * 0.1;
+    var przelicznikCost = 1 + Math.round(actualLvl/3) * 0.1;
 
     state[upgrade_id].pointsPerClick = Math.round(basicPPC * przelicznikPPC)
     state[upgrade_id].pointsPerSecond = Math.round(basicPPS * przelicznikPPC)

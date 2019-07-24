@@ -1,40 +1,74 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="top col-12">
-            <div *ngIf="window">
-                <p>Welcome {{username}}</p>
-                <p>Your statistics:</p>
-                <h3>Your score: {{(statistic | async)?.score}}</h3>
-                <p>Money/click: {{(statistic | async)?.pointsPerClick}}</p>
-                <p>Money/s: {{(statistic | async)?.pointsPerSecond}}</p>
-                <p>Time played: {{(statistic | async)?.timePlayed}} seconds</p>
-                <p>Clicks: {{(statistic | async)?.clicks}}</p>
-                <p>Score/clicks: {{( statistic | async)?.scoreFromClicks}}</p>
-                <p>Score/sec: {{( statistic | async)?.scoreFromSecond}}</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="mid-left col-8">
-            <h1>*title*</h1>
-            <div class="main-button shadow p-3 mb-5" (click)="click()"></div>
-            <div>
-                <h4>Money:</h4>
-            </div>
-            <div>
-                <h1>${{(statistic | async)?.money}}</h1>
-            </div>
-        </div>
-        <div class="mid-right col-4">
-            <div *ngFor="let item of actualUpgrades | async; let i = index;" (click)="upgrade(i)">
-                <div class="shadow p-3 mb-5 shop-button" *ngIf="((statistic | async)?.score >= (i * 1000))" [ngClass]="((statistic | async)?.money >= (actualUpgrades | async)[i]?.cost)?'green':'red'">
-                    <p class="button-text name">{{(actualUpgrades | async)[i]?.name}}</p>
-                    <p class="button-text">Lvl: {{(statistic | async)?.upgradeLevels[i].upgradeLvl}}</p>
-                    <p class="button-text">Stats:
-                        {{(actualUpgrades | async)[i]?.pointsPerClick}}/{{(actualUpgrades | async)[i]?.pointsPerSecond}}
-                    </p>
-                    <p class="button-text">Cost: {{(actualUpgrades | async)[i]?.cost}}$</p>
+        <div class="col-9">
+            <div class="row stats-box">
+                <div class="stats-top noselect" (click)="openWindow()">
+                    <p class="font-center spells-text">STATISTICS</p>
                 </div>
+                <div class="stats" *ngIf="window">
+                    <div class="row">
+
+                        <div class="col-4">
+                            <p>$ on click: {{(statistic | async)?.pointsPerClick}} $</p>
+                            <p>$ on s: {{(statistic | async)?.pointsPerSecond}} $</p>
+                        </div>
+
+                        <div class="col-4">
+                            <p>time: {{(statistic | async)?.timePlayed}} seconds</p>
+                            <p>clicks: {{(statistic | async)?.clicks}}</p>
+                        </div>
+
+                        <div class="col-4">
+                            <p>score from clicks: {{( statistic | async)?.scoreFromClicks}}</p>
+                            <p>score from seconds: {{( statistic | async)?.scoreFromSecond}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row game">
+
+                <div class="col-6 game-main">
+
+                    <h3>{{(statistic | async)?.pointsPerClick}} ppc </h3>
+                    <div class="main-button noselect shadow p-3 mb-5" (click)="click()"></div>
+                    <h3>{{(statistic | async)?.pointsPerSecond}} pps</h3>
+                </div>
+
+                <div class="col-6 game-info">
+                    <h3>USER</h3>
+                    <h1>{{username}}</h1>
+                    <h3>SCORE</h3>
+                    <h1>{{(statistic | async)?.score}}</h1>
+                    <div>
+                        <h4>MONEY</h4>
+                    </div>
+                    <div>
+                        <h1>${{(statistic | async)?.money}}</h1>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="upgrades">
+                <div class="upgrades-head">
+                    <p class="spells-text">SPELLS</p>
+                </div>
+                <div class="upgrades-main">
+                    <div class="upgrades-main-elem" *ngFor="let item of actualUpgrades | async; let i = index;"
+                        (click)="upgrade(i)">
+                        <div class="shadow p-3 shop-button noselect" *ngIf="((statistic | async)?.score >= (i * 1000))"
+                            [ngClass]="((statistic | async)?.money >= (actualUpgrades | async)[i]?.cost)?'green':'red'">
+                            <p class="button-text name">{{(actualUpgrades | async)[i]?.name}}</p>
+                            <p class="button-text">Lvl: {{(statistic | async)?.upgradeLevels[i].upgradeLvl}}</p>
+                            <p class="button-text">Stats:
+                                {{(actualUpgrades | async)[i]?.pointsPerClick}}/{{(actualUpgrades | async)[i]?.pointsPerSecond}}
+                            </p>
+                            <p class="button-text">Cost: {{(actualUpgrades | async)[i]?.cost}}$</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

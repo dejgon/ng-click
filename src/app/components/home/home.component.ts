@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   timer2: any;
   text: string = "Hide";
   clicksPerSecond: Observable<any>;
-  window: boolean = true;
+  window: boolean = false;
   username: string = localStorage.getItem('user');
   constructor(private store: Store<AppState>, private data: DataService) {
     this.staticUpgrades = store.select('upgrades');
@@ -76,11 +76,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   openWindow() {
     this.window = !this.window;
-    if (this.window == true) {
-      this.text = "Hide"
-    } else {
-      this.text = "Open"
-    }
   }
   click() {
     this.store.dispatch(new StatisticActions.ClickEvent());
